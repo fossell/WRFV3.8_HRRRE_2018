@@ -1,0 +1,1274 @@
+None of WRF_EM_CORE, WRF_NMM_CORE, 
+        specified in shell environment.... 
+copying Registry/Registry.EM to Registry/Registry
+ 
+============================================================================================== 
+ 
+V3.8      
+ 
+Compiling: WRF_EM_CORE  
+WRFIO_NCD_LARGE_FILE_SUPPORT=1
+ 
+Linux cheyenne4 3.12.62-60.64.8-default #1 SMP Tue Oct 18 12:21:38 UTC 2016 (42e0a66) x86_64 x86_64 x86_64 GNU/Linux
+ 
+Intel(R) Fortran Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 17.0.1.132 Build 20161005
+Copyright (C) 1985-2016 Intel Corporation.  All rights reserved.
+ifort: warning #10315: specifying -lm before files may supersede the Intel(R) math library and affect performance
+
+GNU ld (GNU Binutils; SUSE Linux Enterprise 12) 2.25.0
+/glade/u/apps/opt/intel/2017u1/compilers_and_libraries_2017.1.132/linux/compiler/lib/intel64_lin/for_main.o: In function `main':
+for_main.c:(.text+0x2a): undefined reference to `MAIN__'
+ 
+============================================================================================== 
+ 
+setting parallel make -j 8
+ 
+============================================================================================== 
+ 
+The following indicate the compilers selected to build the WRF system
+ 
+Serial Fortran compiler (mostly for tool generation):
+which SFC
+/glade/u/apps/ch/opt/ncarcompilers/0.4.1/mpi/ifort
+ 
+Serial C compiler (mostly for tool generation):
+which SCC
+/glade/u/apps/ch/opt/ncarcompilers/0.4.1/mpi/icc
+ 
+Fortran compiler for the model source code:
+which FC
+/glade/u/apps/ch/opt/ncarcompilers/0.4.1/mpi/mpif90
+Will use 'time' to report timing information
+ 
+C compiler for the model source code:
+which CC
+/glade/u/apps/ch/opt/ncarcompilers/0.4.1/mpi/mpicc
+ 
+============================================================================================== 
+ 
+make -i -r MODULE_DIRS="-I../dyn_em -I../dyn_nmm   -I/glade2/scratch2/hclin/hrrr/WRF_io/external/esmf_time_f90  -I/glade2/scratch2/hclin/hrrr/WRF_io/main -I/glade2/scratch2/hclin/hrrr/WRF_io/external/io_netcdf -I/glade2/scratch2/hclin/hrrr/WRF_io/external/io_int -I/glade2/scratch2/hclin/hrrr/WRF_io/frame -I/glade2/scratch2/hclin/hrrr/WRF_io/share -I/glade2/scratch2/hclin/hrrr/WRF_io/phys -I/glade2/scratch2/hclin/hrrr/WRF_io/chem -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I/glade/u/apps/ch/opt/netcdf/4.4.1.1/intel/17.0.1/include " ext
+make[1]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io'
+--------------------------------------
+( cd frame ; make -i -r externals )
+make[2]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/frame'
+( cd /glade2/scratch2/hclin/hrrr/WRF_io/external/esmf_time_f90 ; \
+          make -j 8 FC="ifort -real-size `expr 8 \* 4` -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian  " RANLIB="ranlib" \
+          CPP="/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 " AR="ar" ARFLAGS="ru" )
+make[3]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/esmf_time_f90'
+/bin/rm -f ESMF_Base.o
+/bin/rm -f ESMF_Fraction.o
+sed -e "/\!.*'/s/'//g" ESMF_Base.F90 > ESMF_Base.b
+sed -e "/\!.*'/s/'//g" ESMF_Fraction.F90 > ESMF_Fraction.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_Base.b > ESMF_Base.f
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_Fraction.b > ESMF_Fraction.f
+/bin/rm -f ESMF_Base.b
+/bin/rm -f ESMF_Fraction.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_Base.o -c ESMF_Base.f
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_Fraction.o -c ESMF_Fraction.f
+/bin/rm -f ESMF_BaseTime.o
+sed -e "/\!.*'/s/'//g" ESMF_BaseTime.F90 > ESMF_BaseTime.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_BaseTime.b > ESMF_BaseTime.f
+/bin/rm -f ESMF_BaseTime.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_BaseTime.o -c ESMF_BaseTime.f
+/bin/rm -f ESMF_Calendar.o
+sed -e "/\!.*'/s/'//g" ESMF_Calendar.F90 > ESMF_Calendar.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_Calendar.b > ESMF_Calendar.f
+/bin/rm -f ESMF_Calendar.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_Calendar.o -c ESMF_Calendar.f
+/bin/rm -f ESMF_TimeInterval.o
+/bin/rm -f ESMF_Stubs.o
+sed -e "/\!.*'/s/'//g" ESMF_Stubs.F90 > ESMF_Stubs.b
+sed -e "/\!.*'/s/'//g" ESMF_TimeInterval.F90 > ESMF_TimeInterval.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_Stubs.b > ESMF_Stubs.f
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_TimeInterval.b > ESMF_TimeInterval.f
+/bin/rm -f ESMF_Stubs.b
+/bin/rm -f ESMF_TimeInterval.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_TimeInterval.o -c ESMF_TimeInterval.f
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_Stubs.o -c ESMF_Stubs.f
+/bin/rm -f ESMF_Time.o
+sed -e "/\!.*'/s/'//g" ESMF_Time.F90 > ESMF_Time.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_Time.b > ESMF_Time.f
+/bin/rm -f ESMF_Time.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_Time.o -c ESMF_Time.f
+/bin/rm -f ESMF_Alarm.o
+sed -e "/\!.*'/s/'//g" ESMF_Alarm.F90 > ESMF_Alarm.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_Alarm.b > ESMF_Alarm.f
+/bin/rm -f ESMF_Alarm.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_Alarm.o -c ESMF_Alarm.f
+/bin/rm -f ESMF_Clock.o
+sed -e "/\!.*'/s/'//g" ESMF_Clock.F90 > ESMF_Clock.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_Clock.b > ESMF_Clock.f
+/bin/rm -f ESMF_Clock.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_Clock.o -c ESMF_Clock.f
+/bin/rm -f Meat.o
+/bin/rm -f ESMF_AlarmClock.o
+sed -e "/\!.*'/s/'//g" Meat.F90 > Meat.b
+sed -e "/\!.*'/s/'//g" ESMF_AlarmClock.F90 > ESMF_AlarmClock.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_AlarmClock.b > ESMF_AlarmClock.f
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. Meat.b > Meat.f
+/bin/rm -f ESMF_AlarmClock.b
+/bin/rm -f Meat.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_AlarmClock.o -c ESMF_AlarmClock.f
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o Meat.o -c Meat.f
+/bin/rm -f ESMF_Mod.o
+sed -e "/\!.*'/s/'//g" ESMF_Mod.F90 > ESMF_Mod.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. ESMF_Mod.b > ESMF_Mod.f
+/bin/rm -f ESMF_Mod.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o ESMF_Mod.o -c ESMF_Mod.f
+/bin/rm -f module_symbols_util.o
+sed -e "/\!.*'/s/'//g" module_symbols_util.F90 > module_symbols_util.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. module_symbols_util.b > module_symbols_util.f
+/bin/rm -f module_symbols_util.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o module_symbols_util.o -c module_symbols_util.f
+/bin/rm -f module_utility.o
+sed -e "/\!.*'/s/'//g" module_utility.F90 > module_utility.b
+/lib/cpp -P -C -nostdinc -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. module_utility.b > module_utility.f
+/bin/rm -f module_utility.b
+ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o module_utility.o -c module_utility.f
+/bin/rm -f libesmf_time.a
+if [ "ar" != "lib.exe" ] ; then \
+          ar ru libesmf_time.a ESMF_Alarm.o ESMF_BaseTime.o ESMF_Clock.o ESMF_Time.o Meat.o ESMF_Base.o ESMF_Calendar.o ESMF_Fraction.o ESMF_TimeInterval.o ESMF_Stubs.o ESMF_Mod.o module_symbols_util.o module_utility.o ESMF_AlarmClock.o ; \
+        else \
+          ar /out:libesmf_time.a ESMF_Alarm.o ESMF_BaseTime.o ESMF_Clock.o ESMF_Time.o Meat.o ESMF_Base.o ESMF_Calendar.o ESMF_Fraction.o ESMF_TimeInterval.o ESMF_Stubs.o ESMF_Mod.o module_symbols_util.o module_utility.o ESMF_AlarmClock.o ; \
+        fi
+ar: creating libesmf_time.a
+ranlib libesmf_time.a
+make[3]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/esmf_time_f90'
+( cd /glade2/scratch2/hclin/hrrr/WRF_io/external/io_netcdf ; \
+          make -j 8 NETCDFPATH="/glade/u/apps/ch/opt/netcdf/4.4.1.1/intel/17.0.1" RANLIB="ranlib" CPP="/lib/cpp -P -C -nostdinc" \
+          CC="icc" CFLAGS="-w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0" \
+          FC="ifort -real-size `expr 8 \* 4` -i4  -O3 -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian  " TRADFLAG="" AR="ar" ARFLAGS="ru" )
+make[3]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_netcdf'
+grep nf_format_64bit /glade/u/apps/ch/opt/netcdf/4.4.1.1/intel/17.0.1/include/netcdf.inc ;\
+                        a=$? ; export a ; \
+		if [ $a -a "$WRFIO_NCD_LARGE_FILE_SUPPORT" = "1" ] ; then \
+                          /lib/cpp -P -C -nostdinc -P  -DWRFIO_NCD_LARGE_FILE_SUPPORT -I../ioapi_share wrf_io.F90 | m4 -Uinclude -Uindex -Ulen - > wrf_io.f ; \
+                        else \
+                          /lib/cpp -P -C -nostdinc -P  -I../ioapi_share wrf_io.F90 | m4 -Uinclude -Uindex -Ulen - > wrf_io.f ; \
+                        fi
+/lib/cpp -P -C -nostdinc -P  -I../ioapi_share module_wrfsi_static.F90 > module_wrfsi_static.f
+      integer nf_format_64bit
+      parameter (nf_format_64bit = 2)
+ifort -real-size 32 -i4  -O3 -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o module_wrfsi_static.o  -I/glade/u/apps/ch/opt/netcdf/4.4.1.1/intel/17.0.1/include -I../ioapi_share -c module_wrfsi_static.f
+wrf_io.F90:759:92: warning: missing terminating ' character [enabled by default]
+ ! define(`XDEX',($1-``$1''1+1+(``$1''2-``$1''1+1)*(($2-``$2''1)+($3-``$3''1)*(``$2''2-``$2''1+1))))
+                                                                                            ^
+wrf_io.F90:945:92: warning: missing terminating ' character [enabled by default]
+ ! define(`XDEX',($1-``$1''1+1+(``$1''2-``$1''1+1)*(($2-``$2''1)+($3-``$3''1)*(``$2''2-``$2''1+1))))
+                                                                                            ^
+wrf_io.F90:3629:21: warning: missing terminating ' character [enabled by default]
+       ReturnString= 'This warning code is not supported or handled directly by WRF and NetCDF. &
+                     ^
+wrf_io.F90:3631:92: warning: missing terminating ' character [enabled by default]
+       & to be calling a package-specific routine to return a message for this warning code.'
+                                                                                            ^
+wrf_io.F90:3677:21: warning: missing terminating ' character [enabled by default]
+       ReturnString= 'This error code is not supported or handled directly by WRF and NetCDF. &
+                     ^
+wrf_io.F90:3679:90: warning: missing terminating ' character [enabled by default]
+       & to be calling a package-specific routine to return a message for this error code.'
+                                                                                          ^
+ifort -real-size 32 -i4  -O3 -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o wrf_io.o  -I/glade/u/apps/ch/opt/netcdf/4.4.1.1/intel/17.0.1/include -I../ioapi_share -c wrf_io.f
+/lib/cpp -P -C -nostdinc -P  -I../ioapi_share field_routines.F90 > field_routines.f
+ifort -real-size 32 -i4  -O3 -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   -o field_routines.o  -I/glade/u/apps/ch/opt/netcdf/4.4.1.1/intel/17.0.1/include -I../ioapi_share -c field_routines.f
+/bin/rm -f libwrfio_nf.a
+if [ "ar" != "lib.exe" ] ; then \
+                          ar cr libwrfio_nf.a wrf_io.o field_routines.o module_wrfsi_static.o ; \
+                        else \
+                          ar /out:libwrfio_nf.a wrf_io.o field_routines.o module_wrfsi_static.o ; \
+                        fi
+ranlib libwrfio_nf.a
+make[3]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_netcdf'
+( cd /glade2/scratch2/hclin/hrrr/WRF_io/external/ioapi_share ; \
+          make -i -r NATIVE_RWORDSIZE="4" RWORDSIZE="4" AR="ar" ARFLAGS="ru" )
+make[3]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/ioapi_share'
+( /bin/rm -f ../../inc/wrf_io_flags.h foo_io_flags.h; \
+/bin/cp wrf_io_flags.h foo_io_flags.h; \
+if [ 4 -ne 4 ] ; then \
+  /bin/rm -f foo_io_flags.h; \
+  sed -e 's/104/105/' wrf_io_flags.h > foo_io_flags.h ;\
+fi ; \
+/bin/mv foo_io_flags.h ../../inc/wrf_io_flags.h )
+/bin/rm -f ../../inc/wrf_status_codes.h
+/bin/cp wrf_status_codes.h ../../inc
+make[3]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/ioapi_share'
+( cd /glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib_share ; \
+          make -j 8 CC="icc" CFLAGS="-w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0" RM="rm -f" RANLIB="ranlib" CPP="/lib/cpp -P -C -nostdinc" \
+          FC="ifort -real-size `expr 8 \* 4` -i4 -I.  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   " TRADFLAG="" AR="ar" ARFLAGS="ru" archive) 
+make[3]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib_share'
+make[4]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib_share'
+rm -f io_grib_share.o
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c get_region_center.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gridnav.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c open_file.c
+/lib/cpp -P -C -nostdinc    -I. io_grib_share.F > io_grib_share.f90
+ifort -real-size 32 -i4 -I.  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian      -I.     -c io_grib_share.f90
+ar ru ./libio_grib_share.a io_grib_share.o get_region_center.o gridnav.o open_file.o
+ar: creating ./libio_grib_share.a
+ranlib ./libio_grib_share.a
+make[4]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib_share'
+make[3]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib_share'
+( cd /glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1 ; \
+          make -j 8 CC="icc" CFLAGS="-w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0" RM="rm -f" RANLIB="ranlib" CPP="/lib/cpp -P -C -nostdinc" \
+          FC="ifort -real-size `expr 8 \* 4` -i4 -I.  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   " TRADFLAG="" AR="ar" ARFLAGS="ru" archive)
+make[3]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1'
+        Doing make archive on library subdirectory MEL_grib1
+make[4]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/MEL_grib1'
+make[5]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/MEL_grib1'
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c FTP_getfile.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c apply_bitmap.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c display_gribhdr.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gbyte.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib_dec.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib_enc.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib_seek.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribgetbds.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribgetbms.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribgetgds.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribgetpds.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribhdr2file.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribputbds.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribputgds.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribputpds.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c hdr_print.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c init_dec_struct.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c init_enc_struct.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c init_gribhdr.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c init_struct.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c ld_dec_lookup.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c ld_enc_input.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c ld_enc_lookup.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c ld_grib_origctrs.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c make_default_grbfn.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c make_grib_log.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c map_lvl.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c map_parm.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c pack_spatial.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c prt_inp_struct.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c upd_child_errmsg.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c prt_badmsg.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c swap.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib_uthin.c
+icc  -I. -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c set_bytes.c
+ar ru ../libio_grib1.a FTP_getfile.o apply_bitmap.o display_gribhdr.o gbyte.o grib_dec.o grib_enc.o grib_seek.o gribgetbds.o gribgetbms.o gribgetgds.o gribgetpds.o gribhdr2file.o gribputbds.o gribputgds.o gribputpds.o hdr_print.o init_dec_struct.o init_enc_struct.o init_gribhdr.o init_struct.o ld_dec_lookup.o ld_enc_input.o ld_enc_lookup.o ld_grib_origctrs.o make_default_grbfn.o make_grib_log.o map_lvl.o map_parm.o pack_spatial.o prt_inp_struct.o upd_child_errmsg.o prt_badmsg.o swap.o grib_uthin.o set_bytes.o
+ar: creating ../libio_grib1.a
+ranlib ../libio_grib1.a
+make[5]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/MEL_grib1'
+make[4]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/MEL_grib1'
+        Doing make archive on library subdirectory grib1_util
+make[4]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/grib1_util'
+make[5]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/grib1_util'
+icc  -I. -I../MEL_grib1 -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c alloc_2d.c
+icc  -I. -I../MEL_grib1 -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c read_grib.c
+icc  -I. -I../MEL_grib1 -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c write_grib.c
+ar ru ../libio_grib1.a alloc_2d.o read_grib.o write_grib.o
+ranlib ../libio_grib1.a
+make[5]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/grib1_util'
+make[4]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/grib1_util'
+        Doing make archive on library subdirectory WGRIB
+make[4]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/WGRIB'
+icc -c -O wgrib_main.c
+icc -c -O seekgrib.c
+icc -c -O ibm2flt.c
+icc -c -O readgrib.c
+icc -c -O intpower.c
+icc -c -O cnames.c
+icc -c -O BDSunpk.c
+icc -c -O flt2ieee.c
+icc -c -O wrtieee.c
+icc -c -O levels.c
+icc -c -O PDStimes.c
+icc -c -O missing.c
+icc -c -O nceptable_reanal.c
+icc -c -O nceptable_opn.c
+icc -c -O ensemble.c
+icc -c -O ombtable.c
+icc -c -O ec_ext.c
+icc -c -O gribtable.c
+icc -c -O gds_grid.c
+icc -c -O PDS_date.c
+icc -c -O ectable_128.c
+icc -c -O ectable_129.c
+icc -c -O ectable_130.c
+icc -c -O ectable_131.c
+icc -c -O ectable_140.c
+icc -c -O ectable_150.c
+icc -c -O ectable_151.c
+icc -c -O ectable_160.c
+icc -c -O ectable_170.c
+icc -c -O ectable_180.c
+icc -c -O nceptab_129.c
+icc -c -O dwdtable_002.c
+icc -c -O dwdtable_201.c
+icc -c -O dwdtable_202.c
+icc -c -O dwdtable_203.c
+icc -c -O cptectable_254.c
+icc -c -O nceptab_130.c
+icc -c -O nceptab_131.c
+icc -o wgrib.exe wgrib_main.o seekgrib.o ibm2flt.o readgrib.o intpower.o cnames.o BDSunpk.o flt2ieee.o wrtieee.o levels.o PDStimes.o missing.o nceptable_reanal.o nceptable_opn.o ensemble.o ombtable.o ec_ext.o gribtable.o gds_grid.o PDS_date.o ectable_128.o ectable_129.o ectable_130.o ectable_131.o ectable_140.o ectable_150.o ectable_151.o ectable_160.o ectable_170.o ectable_180.o nceptab_129.o dwdtable_002.o dwdtable_201.o dwdtable_202.o dwdtable_203.o cptectable_254.o nceptab_130.o nceptab_131.o #-lm
+( cd .. ; \rm -f wgrib.exe ; \ln -sf WGRIB/wgrib.exe wgrib.exe ; cd WGRIB )
+make[4]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1/WGRIB'
+make[4]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1'
+icc  -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../ -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib1_routines.c
+icc  -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../ -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribmap.c
+rm -f io_grib1.o
+icc  -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../ -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c trim.c
+/lib/cpp -P -C -nostdinc    -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../ io_grib1.F > io_grib1.f90
+io_grib1.F:635:24: warning: missing terminating ' character [enabled by default]
+   ! If DateStr is all 0's, we reset it to StartDate (if StartDate exists).  
+                        ^
+io_grib1.F:651:44: warning: missing terminating ' character [enabled by default]
+   ! Check if this is a domain that we haven't seen yet.  If so, add it to 
+                                            ^
+io_grib1.F:1060:78: warning: missing terminating ' character [enabled by default]
+                  !   to fix a bug with transfer with the xlf compiler on NCAR's
+                                                                              ^
+ifort -real-size 32 -i4 -I.  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian      -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../     -c io_grib1.f90
+ar ru ./libio_grib1.a grib1_routines.o gribmap.o io_grib1.o trim.o
+ranlib ./libio_grib1.a
+make[4]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1'
+make[3]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_grib1'
+( cd /glade2/scratch2/hclin/hrrr/WRF_io/external/io_int ; \
+          make -j 8 CC="mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK " CFLAGS_LOCAL="-w -O3 -ip " RM="rm -f" RANLIB="ranlib" CPP="/lib/cpp -P -C -nostdinc" \
+          FC="time mpif90 -f90=ifort -real-size `expr 8 \* 4` -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   " FGREP="fgrep -iq" \
+          TRADFLAG="" AR="ar" ARFLAGS="ru" ARCHFLAGS="-DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0" all )
+make[3]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_int'
+rm -f module_internal_header_util.f
+awk '{print "#define", toupper($4), $6}' < ../../inc/intio_tags.h > io_int_idx_tags.h
+/lib/cpp -P -C -nostdinc  -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 module_io_int_idx.F90 > module_io_int_idx.f
+/lib/cpp -P -C -nostdinc  -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 module_io_int_read.F90 > module_io_int_read.f
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+/lib/cpp -P -C -nostdinc  -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 test_io_idx.F90 > test_io_idx.f
+mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -o io_int_idx.o -c -w -O3 -ip  io_int_idx.c
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+cp ../../frame/module_internal_header_util.F mod_int_hdr_util.b
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+/lib/cpp -P -C -nostdinc  -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -I../../inc -I../ioapi_share mod_int_hdr_util.b > module_internal_header_util.f
+time mpif90 -f90=ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian     -o module_io_int_idx.o -c module_io_int_idx.f
+module_io_int_read.F90:18:40: warning: missing terminating ' character [enabled by default]
+ !! Note that this module contains ifdef's so if it is compiled
+                                        ^
+mod_int_hdr_util.b:119:47: warning: missing terminating " character [enabled by default]
+ !  Other items are described in detail in the "WRF I/O and Model Coupling API 
+                                               ^
+mod_int_hdr_util.b:120:17: warning: missing terminating " character [enabled by default]
+ !  Specification".  
+                 ^
+mod_int_hdr_util.b:278:47: warning: missing terminating " character [enabled by default]
+ !  Other items are described in detail in the "WRF I/O and Model Coupling API 
+                                               ^
+mod_int_hdr_util.b:279:17: warning: missing terminating " character [enabled by default]
+ !  Specification".  
+                 ^
+mod_int_hdr_util.b:366:47: warning: missing terminating " character [enabled by default]
+ !  Other items are described in detail in the "WRF I/O and Model Coupling API 
+                                               ^
+mod_int_hdr_util.b:367:17: warning: missing terminating " character [enabled by default]
+ !  Specification".  
+                 ^
+mod_int_hdr_util.b:539:47: warning: missing terminating " character [enabled by default]
+ !  Other items are described in detail in the "WRF I/O and Model Coupling API 
+                                               ^
+mod_int_hdr_util.b:540:17: warning: missing terminating " character [enabled by default]
+ !  Specification".  
+                 ^
+mod_int_hdr_util.b:596:47: warning: missing terminating " character [enabled by default]
+ !  Other items are described in detail in the "WRF I/O and Model Coupling API
+                                               ^
+mod_int_hdr_util.b:597:17: warning: missing terminating " character [enabled by default]
+ !  Specification".
+                 ^
+mod_int_hdr_util.b:772:47: warning: missing terminating " character [enabled by default]
+ !  Other items are described in detail in the "WRF I/O and Model Coupling API 
+                                               ^
+mod_int_hdr_util.b:773:17: warning: missing terminating " character [enabled by default]
+ !  Specification".  
+                 ^
+mod_int_hdr_util.b:861:47: warning: missing terminating " character [enabled by default]
+ !  Other items are described in detail in the "WRF I/O and Model Coupling API 
+                                               ^
+mod_int_hdr_util.b:862:17: warning: missing terminating " character [enabled by default]
+ !  Specification".  
+                 ^
+mod_int_hdr_util.b:947:47: warning: missing terminating " character [enabled by default]
+ !  Other items are described in detail in the "WRF I/O and Model Coupling API 
+                                               ^
+mod_int_hdr_util.b:948:17: warning: missing terminating " character [enabled by default]
+ !  Specification".  
+                 ^
+rm -f mod_int_hdr_util.b
+time mpif90 -f90=ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian     -o module_internal_header_util.o -c module_internal_header_util.f
+0.13user 1.12system 0:11.58elapsed 10%CPU (0avgtext+0avgdata 32504maxresident)k
+0inputs+0outputs (0major+23488minor)pagefaults 0swaps
+time mpif90 -f90=ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian     -I../../frame -o module_io_int_read.o -c module_io_int_read.f
+0.73user 1.11system 0:11.81elapsed 15%CPU (0avgtext+0avgdata 42600maxresident)k
+0inputs+0outputs (0major+24809minor)pagefaults 0swaps
+/lib/cpp -P -C -nostdinc  -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I../../inc -I../ioapi_share io_int.F90 | m4 -Uinclude -Uindex -Ulen - > io_int.f
+io_int.F90:111:58: warning: missing terminating ' character [enabled by default]
+       ! unformatted I/O must be sequential because we don't have fixed record 
+                                                          ^
+time mpif90 -f90=ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian     -I../../inc -I../ioapi_share -o io_int.o -c io_int.f
+0.41user 0.27system 0:02.24elapsed 30%CPU (0avgtext+0avgdata 40848maxresident)k
+0inputs+0outputs (0major+25350minor)pagefaults 0swaps
+0.87user 0.26system 0:01.63elapsed 69%CPU (0avgtext+0avgdata 42108maxresident)k
+0inputs+0outputs (0major+27300minor)pagefaults 0swaps
+rm -f libwrfio_int.a
+if [ `echo "time mpif90 -f90=ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   " | awk '{print $1}'` = "gfortran" ] ; then \
+	echo removing external declaration of iargc for gfortran ; \
+	/lib/cpp -P -C -nostdinc  -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I../ioapi_share diffwrf.F90 | \
+	sed '/integer *, *external.*iargc/d' > diffwrf.f  ; \
+else \
+	/lib/cpp -P -C -nostdinc  -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I../ioapi_share diffwrf.F90 > diffwrf.f  ; \
+fi ; \
+time mpif90 -f90=ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian    -c  -I../ioapi_share diffwrf.f ; \
+
+ar ru libwrfio_int.a io_int.o io_int_idx.o module_io_int_idx.o module_io_int_read.o
+ar: creating libwrfio_int.a
+ranlib libwrfio_int.a
+time mpif90 -f90=ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian      -o test_io_idx test_io_idx.f -L. -lwrfio_int
+diffwrf.F90:344:43: warning: missing terminating ' character [enabled by default]
+               ! borrowed from  Thomas Oppe's comp program
+                                           ^
+
+real	0m0.757s
+user	0m0.320s
+sys	0m0.256s
+if [ -f ../../frame/pack_utils.o -a -f ../../frame/clog.o ] ; then \
+  time mpif90 -f90=ifort -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian      -I../ioapi_share -o diffwrf diffwrf.f \
+	../../frame/pack_utils.o ../../frame/module_internal_header_util.o ../../frame/module_driver_constants.o ../../frame/module_machine.o ../../frame/module_wrf_error.o ../../frame/wrf_debug.o  libwrfio_int.a ; \
+fi
+0.16user 0.41system 0:00.81elapsed 71%CPU (0avgtext+0avgdata 43364maxresident)k
+0inputs+0outputs (0major+44804minor)pagefaults 0swaps
+make[3]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/io_int'
+( cd /glade2/scratch2/hclin/hrrr/WRF_io/external/fftpack/fftpack5 ; \
+          make -j 8 FC="ifort" FFLAGS="-real-size `expr 8 \* 4` -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian  " RANLIB="ranlib" AR="ar" \
+          ARFLAGS="ru" CPP="/lib/cpp -P -C -nostdinc" CPPFLAGS="-DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.  " RM="rm -f" )
+make[3]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/fftpack/fftpack5'
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1f2kb.F  > c1f2kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cfft1b.F  > cfft1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmf3kf.F  > cmf3kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cosqb1.F  > cosqb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   costmi.F  > costmi.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcosq1f.F  > dcosq1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dfftb1.F  > dfftb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradb2.F  > mradb2.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1f2kb.f90
+cfft1b.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+cfft1b.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or CFFT1B for a given transform length N.  WSAVE's contents may be
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cfft1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmf3kf.f90
+dcosq1f.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+dcosq1f.F:60:63: warning: missing terminating ' character [enabled by default]
+ !    DCOSQ1F or DCOSQ1B for a given transform length N.  WSAVE's contents may
+                                                               ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cosqb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcosq1f.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   costmi.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dfftb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradb2.f90
+rm -f -f dcosq1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mrfti1.F  > mrfti1.f90
+rm -f -f cosqb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1fgkf.F  > r1fgkf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mrfti1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1fgkf.f90
+rm -f -f cmf3kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfft2i.F  > rfft2i.f90
+rm -f -f c1f2kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sinqmi.F  > sinqmi.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfft2i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sinqmi.f90
+rm -f -f cfft1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1f2kf.F  > z1f2kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1f2kf.f90
+rm -f -f mradb2.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zfft1f.F  > zfft1f.f90
+zfft1f.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+zfft1f.F:60:54: warning: missing terminating ' character [enabled by default]
+ !    or ZFFT1B for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zfft1f.f90
+rm -f -f costmi.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmf4kb.F  > zmf4kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmf4kb.f90
+rm -f -f dfftb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1f2kf.F  > c1f2kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1f2kf.f90
+rm -f -f rfft2i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cfft1f.F  > cfft1f.f90
+cfft1f.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+cfft1f.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or CFFT1B for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cfft1f.f90
+rm -f -f mrfti1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmf4kb.F  > cmf4kb.f90
+rm -f -f sinqmi.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cosqf1.F  > cosqf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmf4kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cosqf1.f90
+rm -f -f z1f2kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1f2kb.F  > d1f2kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1f2kb.f90
+rm -f -f r1fgkf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcosq1i.F  > dcosq1i.f90
+rm -f -f zfft1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dfftf1.F  > dfftf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcosq1i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dfftf1.f90
+rm -f -f cfft1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradb3.F  > mradb3.f90
+rm -f -f c1f2kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradb3.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   msntb1.F  > msntb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   msntb1.f90
+rm -f -f zmf4kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r4_factor.F  > r4_factor.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r4_factor.f90
+rm -f -f cosqf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfftb1.F  > rfftb1.f90
+rm -f -f cmf4kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sint1b.F  > sint1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfftb1.f90
+sint1b.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+sint1b.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or SINT1B for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sint1b.f90
+rm -f -f d1f2kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1f3kb.F  > z1f3kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1f3kb.f90
+rm -f -f dcosq1i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zfft1i.F  > zfft1i.f90
+rm -f -f r4_factor.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmf4kf.F  > zmf4kf.f90
+rm -f -f dfftf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zfft1i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1f3kb.F  > c1f3kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmf4kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1f3kb.f90
+rm -f -f mradb3.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cfft1i.F  > cfft1i.f90
+rm -f -f msntb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmf4kf.F  > cmf4kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmf4kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cfft1i.f90
+rm -f -f sint1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cosqmb.F  > cosqmb.f90
+cosqmb.F:70:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+cosqmb.F:72:54: warning: missing terminating ' character [enabled by default]
+ !    or COSQMB for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cosqmb.f90
+rm -f -f z1f3kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1f2kf.F  > d1f2kf.f90
+rm -f -f rfftb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcosqb1.F  > dcosqb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1f2kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcosqb1.f90
+rm -f -f zfft1i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dffti1.F  > dffti1.f90
+rm -f -f zmf4kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dffti1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradb4.F  > mradb4.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradb4.f90
+rm -f -f cfft1i.f90
+rm -f -f c1f3kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   msntf1.F  > msntf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r4_mcfti1.F  > r4_mcfti1.f90
+rm -f -f cmf4kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfftf1.F  > rfftf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   msntf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfftf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r4_mcfti1.f90
+rm -f -f cosqmb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sint1f.F  > sint1f.f90
+sint1f.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+sint1f.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or SINT1B for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sint1f.f90
+rm -f -f d1f2kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1f3kf.F  > z1f3kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1f3kf.f90
+rm -f -f dcosqb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zfft2b.F  > zfft2b.f90
+zfft2b.F:61:51: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV). WSAVE's contents must be
+                                                   ^
+zfft2b.F:63:54: warning: missing terminating ' character [enabled by default]
+ !    or ZFFT2B with transform lengths L and M.  WSAVE's contents may be
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zfft2b.f90
+rm -f -f mradb4.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmf5kb.F  > zmf5kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmf5kb.f90
+rm -f -f dffti1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1f3kf.F  > c1f3kf.f90
+rm -f -f sint1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cfft2b.F  > cfft2b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1f3kf.f90
+cfft2b.F:63:51: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV). WSAVE's contents must be
+                                                   ^
+cfft2b.F:65:54: warning: missing terminating ' character [enabled by default]
+ !    or CFFT2B with transform lengths L and M.  WSAVE's contents may be
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cfft2b.f90
+rm -f -f r4_mcfti1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmf5kb.F  > cmf5kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmf5kb.f90
+rm -f -f rfftf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cosqmf.F  > cosqmf.f90
+cosqmf.F:71:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+cosqmf.F:73:54: warning: missing terminating ' character [enabled by default]
+ !    or COSQMB for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cosqmf.f90
+rm -f -f msntf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1f3kb.F  > d1f3kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1f3kb.f90
+rm -f -f zfft2b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcosqf1.F  > dcosqf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcosqf1.f90
+rm -f -f z1f3kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dsint1b.F  > dsint1b.f90
+rm -f -f zmf5kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradb5.F  > mradb5.f90
+dsint1b.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+dsint1b.F:60:61: warning: missing terminating ' character [enabled by default]
+ !    SINT1F or SINT1B for a given transform length N.  WSAVE's contents
+                                                             ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dsint1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradb5.f90
+rm -f -f cfft2b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1f2kb.F  > r1f2kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1f2kb.f90
+rm -f -f c1f3kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r4_tables.F  > r4_tables.f90
+rm -f -f cmf5kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rffti1.F  > rffti1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r4_tables.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rffti1.f90
+rm -f -f cosqmf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sint1i.F  > sint1i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sint1i.f90
+rm -f -f d1f3kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1f4kb.F  > z1f4kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1f4kb.f90
+rm -f -f dcosqf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zfft2f.F  > zfft2f.f90
+zfft2f.F:61:51: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV). WSAVE's contents must be
+                                                   ^
+zfft2f.F:63:54: warning: missing terminating ' character [enabled by default]
+ !    or ZFFT2B with transform lengths L and M.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zfft2f.f90
+rm -f -f dsint1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmf5kf.F  > zmf5kf.f90
+rm -f -f mradb5.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1f4kb.F  > c1f4kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmf5kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1f4kb.f90
+rm -f -f r1f2kb.f90
+rm -f -f r4_tables.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cfft2f.F  > cfft2f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmf5kf.F  > cmf5kf.f90
+rm -f -f rffti1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmf5kf.f90
+cfft2f.F:63:51: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV). WSAVE's contents must be
+                                                   ^
+cfft2f.F:65:54: warning: missing terminating ' character [enabled by default]
+ !    or CFFT2B with transform lengths L and M.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cfft2f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cosqmi.F  > cosqmi.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cosqmi.f90
+rm -f -f sint1i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1f3kf.F  > d1f3kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1f3kf.f90
+rm -f -f zfft2f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcost1b.F  > dcost1b.f90
+dcost1b.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+dcost1b.F:60:63: warning: missing terminating ' character [enabled by default]
+ !    DCOST1F or DCOST1B for a given transform length N.  WSAVE's contents
+                                                               ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcost1b.f90
+rm -f -f z1f4kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dsint1f.F  > dsint1f.f90
+dsint1f.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+dsint1f.F:60:63: warning: missing terminating ' character [enabled by default]
+ !    DSINT1F or DSINT1B for a given transform length N.  WSAVE's contents
+                                                               ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dsint1f.f90
+rm -f -f c1f4kb.f90
+rm -f -f zmf5kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradbg.F  > mradbg.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1f2kf.F  > r1f2kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradbg.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1f2kf.f90
+rm -f -f cmf5kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r8_factor.F  > r8_factor.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r8_factor.f90
+rm -f -f dcost1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfftmb.F  > rfftmb.f90
+rm -f -f cfft2f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sintb1.F  > sintb1.f90
+rfftmb.F:70:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfftmb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sintb1.f90
+rm -f -f d1f3kf.f90
+rm -f -f cosqmi.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1f4kf.F  > z1f4kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zfft2i.F  > zfft2i.f90
+rm -f -f dsint1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmfgkb.F  > zmfgkb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zfft2i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1f4kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmfgkb.f90
+rm -f -f r1f2kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1f4kf.F  > c1f4kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1f4kf.f90
+rm -f -f mradbg.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cfft2i.F  > cfft2i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cfft2i.f90
+rm -f -f rfftmb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmfgkb.F  > cmfgkb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmfgkb.f90
+rm -f -f zfft2i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cost1b.F  > cost1b.f90
+rm -f -f r8_factor.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1f4kb.F  > d1f4kb.f90
+cost1b.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+cost1b.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or COST1B for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cost1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1f4kb.f90
+rm -f -f cfft2i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcost1f.F  > dcost1f.f90
+rm -f -f zmfgkb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dsint1i.F  > dsint1i.f90
+rm -f -f sintb1.f90
+dcost1f.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+dcost1f.F:60:63: warning: missing terminating ' character [enabled by default]
+ !    DCOST1F or DCOST1B for a given transform length N.  WSAVE's contents
+                                                               ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcost1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradf2.F  > mradf2.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradf2.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dsint1i.f90
+rm -f -f z1f4kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1f3kb.F  > r1f3kb.f90
+rm -f -f c1f4kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r8_mcfti1.F  > r8_mcfti1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1f3kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r8_mcfti1.f90
+rm -f -f cost1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfftmf.F  > rfftmf.f90
+rfftmf.F:70:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfftmf.f90
+rm -f -f cmfgkb.f90
+rm -f -f d1f4kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sintf1.F  > sintf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1f5kb.F  > z1f5kb.f90
+rm -f -f dcost1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zfftmb.F  > zfftmb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sintf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1f5kb.f90
+zfftmb.F:73:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zfftmb.f90
+rm -f -f dsint1i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmfgkf.F  > zmfgkf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmfgkf.f90
+rm -f -f mradf2.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1f5kb.F  > c1f5kb.f90
+rm -f -f r8_mcfti1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cfftmb.F  > cfftmb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1f5kb.f90
+cfftmb.F:75:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cfftmb.f90
+rm -f -f rfftmf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmfgkf.F  > cmfgkf.f90
+rm -f -f r1f3kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cost1f.F  > cost1f.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmfgkf.f90
+cost1f.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+cost1f.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or COST1B for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cost1f.f90
+rm -f -f zfftmb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1f4kf.F  > d1f4kf.f90
+rm -f -f sintf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcost1i.F  > dcost1i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1f4kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcost1i.f90
+rm -f -f cfftmb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dsintb1.F  > dsintb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dsintb1.f90
+rm -f -f z1f5kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradf3.F  > mradf3.f90
+rm -f -f c1f5kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1f3kf.F  > r1f3kf.f90
+rm -f -f cost1f.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradf3.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r8_tables.F  > r8_tables.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1f3kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r8_tables.f90
+rm -f -f zmfgkf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfftmi.F  > rfftmi.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfftmi.f90
+rm -f -f dcost1i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sintmb.F  > sintmb.f90
+sintmb.F:69:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+sintmb.F:71:54: warning: missing terminating ' character [enabled by default]
+ !    or SINTMB for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sintmb.f90
+rm -f -f cmfgkf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1f5kf.F  > z1f5kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1f5kf.f90
+rm -f -f dsintb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zfftmf.F  > zfftmf.f90
+zfftmf.F:72:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zfftmf.f90
+rm -f -f d1f4kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmfm1b.F  > zmfm1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmfm1b.f90
+rm -f -f r1f3kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1f5kf.F  > c1f5kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1f5kf.f90
+rm -f -f mradf3.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cfftmf.F  > cfftmf.f90
+cfftmf.F:74:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cfftmf.f90
+rm -f -f r8_tables.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmfm1b.F  > cmfm1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmfm1b.f90
+rm -f -f rfftmi.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cost1i.F  > cost1i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cost1i.f90
+rm -f -f zfftmf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1f5kb.F  > d1f5kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1f5kb.f90
+rm -f -f sintmb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcostb1.F  > dcostb1.f90
+rm -f -f zmfm1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dsintf1.F  > dsintf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcostb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dsintf1.f90
+rm -f -f cfftmf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradf4.F  > mradf4.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradf4.f90
+rm -f -f c1f5kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1f4kb.F  > r1f4kb.f90
+rm -f -f cmfm1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfft1b.F  > rfft1b.f90
+rm -f -f cost1i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sinq1b.F  > sinq1b.f90
+rfft1b.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1f4kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfft1b.f90
+sinq1b.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+sinq1b.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or SINQ1B for a given transform length N.  WSAVE's contents may be
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sinq1b.f90
+rm -f -f z1f5kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sintmf.F  > sintmf.f90
+sintmf.F:69:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+sintmf.F:71:54: warning: missing terminating ' character [enabled by default]
+ !    or SINTMB for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sintmf.f90
+rm -f -f dcostb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1fgkb.F  > z1fgkb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1fgkb.f90
+rm -f -f dsintf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zfftmi.F  > zfftmi.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zfftmi.f90
+rm -f -f rfft1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmfm1f.F  > zmfm1f.f90
+rm -f -f d1f5kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1fgkb.F  > c1fgkb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmfm1f.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1fgkb.f90
+rm -f -f mradf4.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cfftmi.F  > cfftmi.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cfftmi.f90
+rm -f -f r1f4kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmfm1f.F  > cmfm1f.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmfm1f.f90
+rm -f -f sintmf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   costb1.F  > costb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   costb1.f90
+rm -f -f sinq1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1f5kf.F  > d1f5kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1f5kf.f90
+rm -f -f zfftmi.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcostf1.F  > dcostf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcostf1.f90
+rm -f -f z1fgkb.f90
+rm -f -f zmfm1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mcsqb1.F  > mcsqb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradf5.F  > mradf5.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mcsqb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradf5.f90
+rm -f -f c1fgkb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1f4kf.F  > r1f4kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1f4kf.f90
+rm -f -f cfftmi.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfft1f.F  > rfft1f.f90
+rfft1f.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfft1f.f90
+rm -f -f cmfm1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sinq1f.F  > sinq1f.f90
+rm -f -f costb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sintmi.F  > sintmi.f90
+sinq1f.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+sinq1f.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or SINQ1B for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sinq1f.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sintmi.f90
+rm -f -f dcostf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1fgkf.F  > z1fgkf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1fgkf.f90
+rm -f -f d1f5kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmf2kb.F  > zmf2kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmf2kb.f90
+rm -f -f mcsqb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1fgkf.F  > c1fgkf.f90
+rm -f -f r1f4kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmf2kb.F  > cmf2kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1fgkf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmf2kb.f90
+rm -f -f rfft1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cosq1b.F  > cosq1b.f90
+cosq1b.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+cosq1b.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or COSQ1B for a given transform length N.  WSAVE's contents may be
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cosq1b.f90
+rm -f -f mradf5.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   costf1.F  > costf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   costf1.f90
+rm -f -f sintmi.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1fgkb.F  > d1fgkb.f90
+rm -f -f sinq1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dfft1b.F  > dfft1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1fgkb.f90
+dfft1b.F:56:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dfft1b.f90
+rm -f -f zmf2kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mcsqf1.F  > mcsqf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mcsqf1.f90
+rm -f -f z1fgkf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mradfg.F  > mradfg.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mradfg.f90
+rm -f -f c1fgkf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1f5kb.F  > r1f5kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1f5kb.f90
+rm -f -f costf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfft1i.F  > rfft1i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfft1i.f90
+rm -f -f dfft1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sinq1i.F  > sinq1i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sinq1i.f90
+rm -f -f cosq1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   xercon.F  > xercon.f90
+xercon.F:16:22: warning: missing terminating ' character [enabled by default]
+ !    For multiple FFT's to execute correctly, INC, JUMP, N and LOT must
+                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   xercon.f90
+rm -f -f cmf2kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1fm1b.F  > z1fm1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1fm1b.f90
+rm -f -f d1fgkb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmf2kf.F  > zmf2kf.f90
+rm -f -f mcsqf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1fm1b.F  > c1fm1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmf2kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1fm1b.f90
+rm -f -f mradfg.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmf2kf.F  > cmf2kf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmf2kf.f90
+rm -f -f r1f5kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cosq1f.F  > cosq1f.f90
+rm -f -f sinq1i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   costmb.F  > costmb.f90
+rm -f -f rfft1i.f90
+rm -f -f xercon.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   d1fgkf.F  > d1fgkf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dfft1f.F  > dfft1f.f90
+costmb.F:70:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+costmb.F:72:54: warning: missing terminating ' character [enabled by default]
+ !    or COSTMB for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   costmb.f90
+cosq1f.F:60:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+cosq1f.F:62:54: warning: missing terminating ' character [enabled by default]
+ !    or COSQ1B for a given transform length N.  WSAVE's contents may be
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cosq1f.f90
+rm -f -f z1fm1b.f90
+rm -f -f c1fm1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mcstb1.F  > mcstb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   d1fgkf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mrftb1.F  > mrftb1.f90
+rm -f -f zmf2kf.f90
+rm -f -f cmf2kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1f5kf.F  > r1f5kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfft2b.F  > rfft2b.f90
+dfft1f.F:56:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dfft1f.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mrftb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mcstb1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1f5kf.f90
+rfft2b.F:61:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+rfft2b.F:63:44: warning: missing terminating ' character [enabled by default]
+ !    or RFFT2B with lengths L and M.  WSAVE's contents may be re-used for
+                                            ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfft2b.f90
+rm -f -f costmb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sinqmb.F  > sinqmb.f90
+sinqmb.F:71:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+sinqmb.F:73:54: warning: missing terminating ' character [enabled by default]
+ !    or SINQMB for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sinqmb.f90
+rm -f -f cosq1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   xerfft.F  > xerfft.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   xerfft.f90
+rm -f -f d1fgkf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1fm1f.F  > z1fm1f.f90
+rm -f -f dfft1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmf3kb.F  > zmf3kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1fm1f.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmf3kb.f90
+rm -f -f mrftb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   c1fm1f.F  > c1fm1f.f90
+rm -f -f rfft2b.f90
+rm -f -f r1f5kf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cmf3kb.F  > cmf3kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   cosq1i.F  > cosq1i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   c1fm1f.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cosq1i.f90
+rm -f -f mcstb1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   costmf.F  > costmf.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   cmf3kb.f90
+costmf.F:70:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+costmf.F:72:54: warning: missing terminating ' character [enabled by default]
+ !    or COSTMB for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   costmf.f90
+rm -f -f sinqmb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dcosq1b.F  > dcosq1b.f90
+dcosq1b.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+dcosq1b.F:60:63: warning: missing terminating ' character [enabled by default]
+ !    DCOSQ1F or DCOSQ1B for a given transform length N.  WSAVE's contents may
+                                                               ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dcosq1b.f90
+rm -f -f zmf3kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   dfft1i.F  > dfft1i.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   dfft1i.f90
+rm -f -f z1fm1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mcstf1.F  > mcstf1.f90
+rm -f -f xerfft.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mcstf1.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   mrftf1.F  > mrftf1.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   mrftf1.f90
+rm -f -f cosq1i.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   r1fgkb.F  > r1fgkb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   r1fgkb.f90
+rm -f -f c1fm1f.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   rfft2f.F  > rfft2f.f90
+rfft2f.F:61:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+rfft2f.F:63:44: warning: missing terminating ' character [enabled by default]
+ !    or RFFT2B with lengths L and M.  WSAVE's contents may be re-used for
+                                            ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   rfft2f.f90
+rm -f -f costmf.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   sinqmf.F  > sinqmf.f90
+sinqmf.F:71:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 4 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+sinqmf.F:73:54: warning: missing terminating ' character [enabled by default]
+ !    or SINQMB for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   sinqmf.f90
+rm -f -f cmf3kb.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   z1f2kb.F  > z1f2kb.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   z1f2kb.f90
+rm -f -f dfft1i.f90
+rm -f -f dcosq1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zfft1b.F  > zfft1b.f90
+/lib/cpp -P -C -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I.   zmf3kf.F  > zmf3kf.f90
+zfft1b.F:58:52: warning: missing terminating ' character [enabled by default]
+ !    Input, real ( kind = 8 ) WSAVE(LENSAV).  WSAVE's contents must be
+                                                    ^
+zfft1b.F:60:54: warning: missing terminating ' character [enabled by default]
+ !    or ZFFT1B for a given transform length N.  WSAVE's contents may be re-used
+                                                      ^
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zfft1b.f90
+ifort -c -real-size 32 -i4  -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian   zmf3kf.f90
+rm -f -f mrftf1.f90
+rm -f -f mcstf1.f90
+rm -f -f rfft2f.f90
+rm -f -f sinqmf.f90
+rm -f -f z1f2kb.f90
+rm -f -f r1fgkb.f90
+rm -f -f zfft1b.f90
+rm -f -f zmf3kf.f90
+ar ru libfftpack.a c1f2kb.o  cfft1b.o  cmf3kf.o  cosqb1.o  costmi.o   dcosq1f.o  dfftb1.o   mradb2.o  mrfti1.o  r1fgkf.o     rfft2i.o  sinqmi.o  z1f2kf.o  zfft1f.o  zmf4kb.o c1f2kf.o  cfft1f.o  cmf4kb.o  cosqf1.o  d1f2kb.o   dcosq1i.o  dfftf1.o   mradb3.o  msntb1.o  r4_factor.o  rfftb1.o  sint1b.o  z1f3kb.o  zfft1i.o  zmf4kf.o c1f3kb.o  cfft1i.o  cmf4kf.o  cosqmb.o  d1f2kf.o   dcosqb1.o  dffti1.o   mradb4.o  msntf1.o  r4_mcfti1.o  rfftf1.o  sint1f.o  z1f3kf.o  zfft2b.o  zmf5kb.o c1f3kf.o  cfft2b.o  cmf5kb.o  cosqmf.o  d1f3kb.o   dcosqf1.o  dsint1b.o  mradb5.o  r1f2kb.o  r4_tables.o  rffti1.o  sint1i.o  z1f4kb.o  zfft2f.o  zmf5kf.o c1f4kb.o  cfft2f.o  cmf5kf.o  cosqmi.o  d1f3kf.o   dcost1b.o  dsint1f.o  mradbg.o  r1f2kf.o  r8_factor.o  rfftmb.o  sintb1.o  z1f4kf.o  zfft2i.o  zmfgkb.o c1f4kf.o  cfft2i.o  cmfgkb.o  cost1b.o  d1f4kb.o   dcost1f.o  dsint1i.o  mradf2.o  r1f3kb.o  r8_mcfti1.o  rfftmf.o  sintf1.o  z1f5kb.o  zfftmb.o  zmfgkf.o c1f5kb.o  cfftmb.o  cmfgkf.o  cost1f.o  d1f4kf.o   dcost1i.o  dsintb1.o  mradf3.o  r1f3kf.o  r8_tables.o  rfftmi.o  sintmb.o  z1f5kf.o  zfftmf.o  zmfm1b.o c1f5kf.o  cfftmf.o  cmfm1b.o  cost1i.o  d1f5kb.o   dcostb1.o  dsintf1.o  mradf4.o  r1f4kb.o  rfft1b.o     sinq1b.o  sintmf.o  z1fgkb.o  zfftmi.o  zmfm1f.o c1fgkb.o  cfftmi.o  cmfm1f.o  costb1.o  d1f5kf.o   dcostf1.o  mcsqb1.o   mradf5.o  r1f4kf.o  rfft1f.o     sinq1f.o  sintmi.o  z1fgkf.o  zmf2kb.o c1fgkf.o  cmf2kb.o  cosq1b.o  costf1.o  d1fgkb.o   dfft1b.o   mcsqf1.o   mradfg.o  r1f5kb.o  rfft1i.o     sinq1i.o  xercon.o  z1fm1b.o  zmf2kf.o c1fm1b.o  cmf2kf.o  cosq1f.o  costmb.o  d1fgkf.o   dfft1f.o   mcstb1.o   mrftb1.o  r1f5kf.o  rfft2b.o     sinqmb.o  xerfft.o  z1fm1f.o  zmf3kb.o c1fm1f.o  cmf3kb.o  cosq1i.o  costmf.o  dcosq1b.o  dfft1i.o   mcstf1.o   mrftf1.o  r1fgkb.o  rfft2f.o     sinqmf.o  z1f2kb.o  zfft1b.o  zmf3kf.o 
+ar: creating libfftpack.a
+ranlib libfftpack.a
+make[3]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/fftpack/fftpack5'
+( cd /glade2/scratch2/hclin/hrrr/WRF_io/external/RSL_LITE ; make -j 8 CC="mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0" \
+          FC="time mpif90 -f90=ifort -O3 -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian    -real-size `expr 8 \* 4` -i4 -convert big_endian" \
+          CPP="/lib/cpp -P -C -nostdinc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  " AR="ar" ARFLAGS="ru" ;\
+          ranlib /glade2/scratch2/hclin/hrrr/WRF_io/external/RSL_LITE/librsl_lite.a )
+make[3]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/RSL_LITE'
+mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c c_code.c
+mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c buf_for_proc.c
+mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c rsl_malloc.c
+mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c rsl_bcast.c
+mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c task_for_point.c
+mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c period.c
+mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c swap.c
+mpicc -cc=icc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -ip  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c cycle.c
+/lib/cpp -P -C -nostdinc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0    f_pack.F90 > f_pack.f
+time mpif90 -f90=ifort -O3 -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian    -real-size 32 -i4 -convert big_endian -o f_pack.o  -c f_pack.f
+1.62user 0.32system 0:03.18elapsed 61%CPU (0avgtext+0avgdata 44544maxresident)k
+0inputs+0outputs (0major+28257minor)pagefaults 0swaps
+/lib/cpp -P -C -nostdinc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_FUNC  -DWRF_USE_CLM  -DDM_PARALLEL -DNETCDF -DHDF5 -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DHYBRID_COORD=1 -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0   f_xpose.F90 > f_xpose.f
+time mpif90 -f90=ifort -O3 -ip -fp-model precise -w -ftz -align all -fno-alias -FR -convert big_endian    -real-size 32 -i4 -convert big_endian -o f_xpose.o  -c f_xpose.f
+0.38user 0.15system 0:00.70elapsed 77%CPU (0avgtext+0avgdata 42544maxresident)k
+0inputs+0outputs (0major+27960minor)pagefaults 0swaps
+/bin/rm -f librsl_lite.a
+ar cr librsl_lite.a c_code.o buf_for_proc.o rsl_malloc.o rsl_bcast.o task_for_point.o period.o swap.o cycle.o f_pack.o f_xpose.o
+make[3]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/external/RSL_LITE'
+( if [ ! -e /glade2/scratch2/hclin/hrrr/WRF_io/tools/gen_comms.c ] ; then \
+          /bin/cp /glade2/scratch2/hclin/hrrr/WRF_io/tools/gen_comms_warning /glade2/scratch2/hclin/hrrr/WRF_io/tools/gen_comms.c ; \
+          cat /glade2/scratch2/hclin/hrrr/WRF_io/external/RSL_LITE/gen_comms.c >> /glade2/scratch2/hclin/hrrr/WRF_io/tools/gen_comms.c ; fi )
+( if [ ! -e module_dm.F ] ; then /bin/cp module_dm_warning module_dm.F ; \
+          cat /glade2/scratch2/hclin/hrrr/WRF_io/external/RSL_LITE/module_dm.F >> module_dm.F ; fi )
+make[2]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io/frame'
+make[1]: Leaving directory '/glade2/scratch2/hclin/hrrr/WRF_io'
+make -i -r MODULE_DIRS="-I../dyn_em -I../dyn_nmm   -I/glade2/scratch2/hclin/hrrr/WRF_io/external/esmf_time_f90  -I/glade2/scratch2/hclin/hrrr/WRF_io/main -I/glade2/scratch2/hclin/hrrr/WRF_io/external/io_netcdf -I/glade2/scratch2/hclin/hrrr/WRF_io/external/io_int -I/glade2/scratch2/hclin/hrrr/WRF_io/frame -I/glade2/scratch2/hclin/hrrr/WRF_io/share -I/glade2/scratch2/hclin/hrrr/WRF_io/phys -I/glade2/scratch2/hclin/hrrr/WRF_io/chem -I/glade2/scratch2/hclin/hrrr/WRF_io/inc -I/glade/u/apps/ch/opt/netcdf/4.4.1.1/intel/17.0.1/include " toolsdir
+make[1]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io'
+--------------------------------------
+( cd tools ; make -i -r CC_TOOLS_CFLAGS="-DNMM_CORE=0" CC_TOOLS="icc  -DIWORDSIZE=4 -DMAX_HISTORY=25" )
+make[2]: Entering directory '/glade2/scratch2/hclin/hrrr/WRF_io/tools'
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  registry.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  my_strtok.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  reg_parse.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  data.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  type.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  misc.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_defs.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_allocs.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_mod_state_descr.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_scalar_indices.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_args.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_config.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  sym.c
+icc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  symtab_gen.c
+Traceback (most recent call last):
+  File "/glade/u/apps/ch/opt/ncarcompilers/0.4.1/mpi/icc", line 124, in <module>
+    sys.exit(invoke(show))
+  File "/glade/u/apps/ch/opt/ncarcompilers/0.4.1/mpi/icc", line 109, in invoke
+    exit_code = subprocess.call(cmd, env=avoid_recursion(), shell=True)
+  File "/glade/u/apps/ch/opt/python/2.7.13/gnu/6.2.0/lib/python2.7/subprocess.py", line 168, in call
+    return Popen(*popenargs, **kwargs).wait()
+  File "/glade/u/apps/ch/opt/python/2.7.13/gnu/6.2.0/lib/python2.7/subprocess.py", line 1073, in wait
+    pid, sts = _eintr_retry_call(os.waitpid, self.pid, 0)
+  File "/glade/u/apps/ch/opt/python/2.7.13/gnu/6.2.0/lib/python2.7/subprocess.py", line 121, in _eintr_retry_call
+    return func(*args)
+KeyboardInterrupt
+Makefile:20: recipe for target 'symtab_gen.o' failed
+make[2]: [symtab_gen.o] Error 1 (ignored)
+Makefile:973: recipe for target 'toolsdir' failed
+make[1]: [toolsdir] Interrupt (ignored)
+Makefile:88: recipe for target 'framework_only' failed
+make: *** [framework_only] Interrupt

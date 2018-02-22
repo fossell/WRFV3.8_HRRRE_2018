@@ -1,0 +1,13 @@
+# Ignore .mod, .o, .a, .exe 
+*.mod
+*.o
+*.a
+*.exe
+*.f90
+*.inc
+
+# Ignore log files
+*.log
+
+# file too large, no need to track?
+run/freezeH2O.dat
