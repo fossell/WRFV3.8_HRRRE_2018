@@ -308,6 +308,11 @@ CONTAINS
                 ,UP_HELI_MAX=grid%up_heli_max                        &
                 ,UP_HELI_MAX16=grid%up_heli_max16                    &
                 ,C_PBLH=grid%c_pblh                                  &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,MSFT=grid%msft                                      &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
                 ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
                 ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
                 ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
@@ -446,6 +451,11 @@ CONTAINS
                 ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
                 ,REFD_MAX=grid%refd_max                              &
                 ,refl_10cm=grid%refl_10cm                            &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,MSFT=grid%msft                                      &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
                 ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
                 ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
                 ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
@@ -547,6 +557,11 @@ CONTAINS
                 ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
                 ,REFD_MAX=grid%refd_max                              &
                 ,refl_10cm=grid%refl_10cm                            &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,MSFT=grid%msft                                      &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
                 ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
                 ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
                 ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
@@ -653,6 +668,11 @@ CONTAINS
                 ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
                 ,REFD_MAX=grid%refd_max                              &
                 ,refl_10cm=grid%refl_10cm                            &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,MSFT=grid%msft                                      &  
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
                 ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
                 ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
                 ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
@@ -759,6 +779,11 @@ CONTAINS
                 ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
                 ,REFD_MAX=grid%refd_max                              &
                 ,refl_10cm=grid%refl_10cm                            &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,MSFT=grid%msft                                      &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
                 ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
                 ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
                 ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
@@ -896,6 +921,11 @@ CONTAINS
                 ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
                 ,REFD_MAX=grid%refd_max                              &
                 ,refl_10cm=grid%refl_10cm                            &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,MSFT=grid%msft                                      &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
                 ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
                 ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
                 ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
