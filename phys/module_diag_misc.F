@@ -190,6 +190,8 @@ CONTAINS
                      ,t,u10,v10,w,u_phy,v_phy,p,pb                    &
                      ,wspd10max                                       &
                      ,wspd10,wspd80,LWP,IWP,maxcldfra,shear100,dt100  &
+                     ,up_heli_min                                     &
+                     ,c_pblh,qv_curr,th2,q2,psfc                      & ! NY PBL
                      ,up_heli_max                                     &
                      ,up_heli_max16                                   &
                      ,w_up_max,w_dn_max                               &
@@ -419,6 +421,7 @@ CONTAINS
 
    REAL, DIMENSION( ims:ime , jms:jme ), INTENT(INOUT) ::        &
                                                       wspd10max  &
+                                                   ,up_heli_min  &
                                                    ,up_heli_max  &
                                                  ,up_heli_max16  &
                                              ,w_up_max,w_dn_max  &
@@ -426,13 +429,21 @@ CONTAINS
                                           ,grpl_max,grpl_colint  &
                                          ,hail_maxk1,hail_max2d  &
                                                       ,refd_max  &
+                                                       ,c_pblh   &
                ,refl_10cm_1km,refl_10cm_4km,composite_refl_10cm  &  ! dcd
                                                             ,ht  &  ! dcd
                                          ,wspd10,wspd80,LWP,IWP  &
                                       ,maxcldfra,shear100,dt100
    INTEGER, INTENT(INOUT) ::           ntimesteps
 
+! NY vars
+   REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT(IN) :: qv_curr 
+   REAL, DIMENSION( ims:ime, jms:jme ), INTENT(IN) :: th2, q2, psfc
    REAL, DIMENSION(ims:ime,kms:kme,jms:jme):: temp_qg, temp_ng, temp_qr, temp_nr
+   REAL, DIMENSION(kps:kpe) :: press_temp, zasl_temp, tv
+
+   REAL                   :: tv_sum_25hpa, tv_avg_25hpa, tv2m
+   INTEGER                :: indx_25hpa, indx_pblh
 
    INTEGER :: idump
 
@@ -672,6 +683,7 @@ CONTAINS
        DO j=j_start(ij),j_end(ij)
        DO i=i_start(ij),i_end(ij)
          wspd10max(i,j)   = 0.
+         up_heli_min(i,j) = 0.
          up_heli_max(i,j) = 0.
          up_heli_max16(i,j) = 0.
          w_up_max(i,j)    = 0.
@@ -681,6 +693,7 @@ CONTAINS
          refd_max(i,j)    = 0.
          hail_maxk1(i,j)  = 0.
          hail_max2d(i,j)  = 0.
+         c_pblh(i,j)      = 0.
          SHEAR100(i,j)=0.
          DT100(i,j)=0.
          WSPD10(i,j)=-99.
@@ -758,6 +771,42 @@ CONTAINS
      ENDDO
    ENDDO
 !  !$OMP END PARALLEL DO
+
+!  !$OMP PARALLEL DO   &
+!  !$OMP PRIVATE ( ij )
+   DO ij = 1 , num_tiles
+      DO j=j_start(ij),j_end(ij)
+      DO i=i_start(ij),i_end(ij)
+         tv2m =  th2(i,j)  * ( 1.0 + 0.61 * q2(i,j) )    ! K
+      DO k=kps,kpe
+         tv(k) = ( t(i,k,j)+300. ) * ( 1.0 + 0.61 * qv_curr(i,k,j) )    ! K
+         press_temp(k) =  ( p(i,k,j) + pb(i,k,j) ) * 0.01           ! hpa
+         zasl_temp(k) = ( ( ph(i,k,j) + phb(i,k,j) ) / g ) ! above sea level in meter
+      ENDDO
+      indx_25hpa = kps
+      DO WHILE ( press_temp(indx_25hpa) .ge. ( ( psfc(i,j)*0.01 ) - 25.0 ) )
+         indx_25hpa = indx_25hpa + 1
+      END DO
+
+      tv_sum_25hpa = 0.0
+      tv_avg_25hpa = 0.0
+      DO k=kps,indx_25hpa
+         tv_sum_25hpa = tv_sum_25hpa + tv(k)
+      END DO
+
+      tv_avg_25hpa = ( tv2m + tv_sum_25hpa ) / (indx_25hpa + 1.0)
+      indx_pblh = kps
+      DO WHILE ( tv(indx_pblh) .lt. (tv_avg_25hPa + 0.50 ) )
+         indx_pblh = indx_pblh + 1
+      END DO
+
+      c_pblh(i,j) = max( 0.0, zasl_temp(indx_pblh) - ht(i,j) ) ! PBL Height above ground level in meter
+
+      ENDDO
+      ENDDO
+   ENDDO
+!  !$OMP END PARALLEL DO
+
 
 !  !$OMP PARALLEL DO   &
 !  !$OMP PRIVATE ( ij )
