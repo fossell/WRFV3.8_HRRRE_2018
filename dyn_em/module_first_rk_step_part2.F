@@ -463,7 +463,14 @@ BENCH_START(helicity_tim)
           CALL wrf_debug ( 200 , ' call cal_helicity' )
           CALL cal_helicity ( config_flags,grid%u_2,grid%v_2,grid%w_2,  &
                               grid%uh,                             &
+                              grid%uh03,                           &
+                              grid%uh01,                           &
+                              grid%rvort1,                         &
                               grid%up_heli_max,                    &
+                              grid%up_heli_min,                    &
+                              grid%up_heli_max03,                  &
+                              grid%up_heli_max01,                  &
+                              grid%rvort1_max,                     &
                               grid%uh16,                           &
                               grid%up_heli_max16,                  &
                               grid%ph_2,grid%phb,                  &

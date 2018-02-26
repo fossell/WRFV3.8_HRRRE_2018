@@ -191,6 +191,9 @@ CONTAINS
                      ,wspd10max                                       &
                      ,wspd10,wspd80,LWP,IWP,maxcldfra,shear100,dt100  &
                      ,up_heli_min                                     &
+                     ,up_heli_max03                                   &
+                     ,up_heli_max01                                   &
+                     ,rvort1_max                                      &
                      ,c_pblh,qv_curr,th2,q2,psfc                      & ! NY PBL
                      ,up_heli_max                                     &
                      ,up_heli_max16                                   &
@@ -428,6 +431,9 @@ CONTAINS
                                                    ,up_heli_min  &
                                                    ,up_heli_max  &
                                                  ,up_heli_max16  &
+                                                 ,up_heli_max03  &
+                                                 ,up_heli_max01  &
+                                                   ,rvort1_max   &
                                              ,w_up_max,w_dn_max  &
                                     ,w_colmean,numcolpts,w_mean  &
                                           ,grpl_max,grpl_colint  &
@@ -710,6 +716,9 @@ CONTAINS
          up_heli_min(i,j) = 0.
          up_heli_max(i,j) = 0.
          up_heli_max16(i,j) = 0.
+         up_heli_max03(i,j) = 0.
+         up_heli_max01(i,j) = 0.
+         rvort1_max(i,j)  = 0.
          w_up_max(i,j)    = 0.
          w_dn_max(i,j)    = 0.
          w_mean(i,j)      = 0.
