@@ -720,7 +720,7 @@ state    real   ICEDEPTH         ij     misc        1         -     i0124rhd=(in
 state    real   XICEM            ij     misc        1         -     rd=(interp_mask_field:lu_index,isice)u=(copy_fcnm)  "XICEM"             "SEA ICE FLAG (PREVIOUS STEP)"  ""
 state    real   ALBSI            ij     misc        1         -     i0124rhd=(interp_mask_field:lu_index,isice)u=(copy_fcnm)  "ALBSI"        "SEA ICE ALBEDO"  ""
 state    real   SNOWSI           ij     misc        1         -     i0124rhd=(interp_mask_field:lu_index,isice)u=(copy_fcnm)  "SNOWSI"       "SNOW DEPTH ON SEA ICE"  "m"
-state    real   SMSTAV           ij     misc        1         -      rd=(interp_mask_field:lu_index,iswater)       "SMSTAV"           "MOISTURE AVAILABILITY" ""
+state    real   SMSTAV           ij     misc        1         -      rhd=(interp_mask_field:lu_index,iswater)       "SMSTAV"           "MOISTURE AVAILABILITY" ""
 state    real   SMSTOT           ij     misc        1         -      r                                          "SMSTOT"           "TOTAL SOIL MOISTURE" "m3 m-3"
 state    real   SOLDRAIN         ij     misc        1         -      r                                          "SOLDRAIN"         "soil column drainage"  "mm"
 state    real   SFCHEADRT        ij     misc        1         -      r                                          "SFCHEADRT"        "surface water depth"  "mm"
