@@ -720,7 +720,7 @@ state    real   ICEDEPTH         ij     misc        1         -     i0124rhd=(in
 state    real   XICEM            ij     misc        1         -     rd=(interp_mask_field:lu_index,isice)u=(copy_fcnm)  "XICEM"             "SEA ICE FLAG (PREVIOUS STEP)"  ""
 state    real   ALBSI            ij     misc        1         -     i0124rhd=(interp_mask_field:lu_index,isice)u=(copy_fcnm)  "ALBSI"        "SEA ICE ALBEDO"  ""
 state    real   SNOWSI           ij     misc        1         -     i0124rhd=(interp_mask_field:lu_index,isice)u=(copy_fcnm)  "SNOWSI"       "SNOW DEPTH ON SEA ICE"  "m"
-state    real   SMSTAV           ij     misc        1         -      rhd=(interp_mask_field:lu_index,iswater)       "SMSTAV"           "MOISTURE AVAILABILITY" ""
+state    real   SMSTAV           ij     misc        1         -      rd=(interp_mask_field:lu_index,iswater)       "SMSTAV"           "MOISTURE AVAILABILITY" ""
 state    real   SMSTOT           ij     misc        1         -      r                                          "SMSTOT"           "TOTAL SOIL MOISTURE" "m3 m-3"
 state    real   SOLDRAIN         ij     misc        1         -      r                                          "SOLDRAIN"         "soil column drainage"  "mm"
 state    real   SFCHEADRT        ij     misc        1         -      r                                          "SFCHEADRT"        "surface water depth"  "mm"
@@ -907,8 +907,8 @@ state   real   DELTA_YSU      ij     misc        1         -     -        "DELTA
 state    real   EXCH_H          ikj     misc        1         Z     r         "EXCH_H"               "SCALAR EXCHANGE COEFFICIENTS "
 state    real   EXCH_M          ikj     misc        1         Z     r         "EXCH_M"               "EXCHANGE COEFFICIENTS "
 state    real  CT              ij      misc        1         -      r        "CT"                    "COUNTERGRADIENT TERM"    "K"
-state   real   THZ0             ij     misc        1         -      r        "THZ0"                  "POTENTIAL TEMPERATURE AT ZNT"                 "K"
-state    real  Z0               ij     misc        1         -      r        "Z0"                    "Background ROUGHNESS LENGTH"                  "m"
+state   real   THZ0             ij     misc        1         -     irh       "THZ0"                  "POTENTIAL TEMPERATURE AT ZNT"                 "K"
+state    real  Z0               ij     misc        1         -     irh       "Z0"                    "Background ROUGHNESS LENGTH"                  "m"
 state   real   QZ0              ij     misc        1         -      r        "QZ0"                   "SPECIFIC HUMIDITY AT ZNT"                     "kg kg-1"
 state   real   UZ0              ij     misc        1         -      r        "UZ0"                   "U WIND COMPONENT AT ZNT"                      "m s-1"
 state   real   VZ0              ij     misc        1         -      r        "VZ0"                   "V WIND COMPONENT AT ZNT"                      "m s-1"
@@ -978,12 +978,12 @@ state   real   ch               ij     misc        1         -      -        "ch
 #state   real   K_h             ikj     misc        1         -     -          "K_h"               "EXCHANGE COEFFICIENT for heat "
 #state   real   K_q             ikj     misc        1         -     -          "K_q"               "EXCHANGE COEFFICIENT for qke "
 #MYNN-EDMF VARIABLES
-state   real   edmf_a          ikj     misc        1         -      ih         "edmf_a"           "EDMF relative updraft  area - moist updrafts" "-"
-state   real   edmf_w          ikj     misc        1         -      ih         "edmf_w"           "EDMF vertical velocity  - mean moist updrafts" "m s-1"
-state   real   edmf_thl        ikj     misc        1         -      ih         "edmf_thl"         "EDMF thetaL  - mean moist updrafts" "K"
-state   real   edmf_qt         ikj     misc        1         -      ih         "edmf_qt"          "EDMF qt  - mean moist updrafts" "kg kg-1"
-state   real   edmf_ent        ikj     misc        1         -      ih         "edmf_ent"          "EDMF entrainment  - mean moist updrafts" "m-1"
-state   real   edmf_qc         ikj     misc        1         -      ih         "edmf_qc"           "EDMF qc - mean moist updrafts" "kg kg-1"
+state   real   edmf_a          ikj     misc        1         -      i          "edmf_a"           "EDMF relative updraft  area - moist updrafts" "-"
+state   real   edmf_w          ikj     misc        1         -      i          "edmf_w"           "EDMF vertical velocity  - mean moist updrafts" "m s-1"
+state   real   edmf_thl        ikj     misc        1         -      i          "edmf_thl"         "EDMF thetaL  - mean moist updrafts" "K"
+state   real   edmf_qt         ikj     misc        1         -      i          "edmf_qt"          "EDMF qt  - mean moist updrafts" "kg kg-1"
+state   real   edmf_ent        ikj     misc        1         -      i          "edmf_ent"          "EDMF entrainment  - mean moist updrafts" "m-1"
+state   real   edmf_qc         ikj     misc        1         -      i          "edmf_qc"           "EDMF qc - mean moist updrafts" "kg kg-1"
 state   integer  nupdraft       ij     misc        1         -      ih        "nupdraft"           "Number of updrafts (neg: all dry, pos: moist)"    ""
 state   real   maxMF            ij     misc        1         -      ih        "maxMF"              "Maximum mass-flux"    "m/s * area"
 
@@ -1315,7 +1315,7 @@ state    real  refl_10cm            ikj misc        1         -      ihdu     "r
 state    real  composite_refl_10cm  ij  misc        1         -      ihdu     "composite_refl_10cm"   "Composite reflectivity"                      "dBZ"
 state    real  refl_10cm_1km        ij  misc        1         -      ihdu     "refl_10cm_1km"         "Reflectivity at 1 km AGL"                    "dBZ"
 state    real  refl_10cm_4km        ij  misc        1         -      ihdu     "refl_10cm_4km"         "Reflectivity at 4 km AGL"                    "dBZ"
-state    real  vt_dbz_wt            ikj misc        1         -      ihdu     "vt_dbz_wt"             "Reflectivity-weighted precip fall speed"     "m s-1"
+state    real  vt_dbz_wt            ikj misc        1         -      idu      "vt_dbz_wt"             "Reflectivity-weighted precip fall speed"     "m s-1"
 state    real  LWP              ij      misc        1         -      irh      "LWP"                   "TIME-STEP Liquid water path"          "g/m2"
 state    real  IWP              ij      misc        1         -      irh      "IWP"                   "TIME-STEP ice water path"             "g/m2"
 state    real  NCA              ij      misc        1         -      r        "NCA"                   "COUNTER OF THE CLOUD RELAXATION TIME IN KF CUMULUS SCHEME"    ""      
@@ -1840,22 +1840,43 @@ state   real  mu_2m            ij       misc        1         -     -         "m
 
 # these are NSSL WRF diagnostics
 state    real    WSPD10MAX        ij     misc        1         -      irh        "WSPD10MAX"      "WIND SPD MAX 10 M"       "m s-1"
+state    real    WSPD10UMAX       ij     misc        1         -      irh        "WSPD10UMAX"     "U WIND MAX 10 M"         "m s-1"
+state    real    WSPD10VMAX       ij     misc        1         -      irh        "WSPD10VMAX"     "V WIND MAX 10 M"         "m s-1"
+state    real    WSPD80MAX        ij     misc        1         -      irh        "WSPD80MAX"      "WIND SPD MAX 80 M"       "m s-1"
+state    real    WSPD80UMAX       ij     misc        1         -      irh        "WSPD80UMAX"     "U WIND MAX 80 M"         "m s-1"
+state    real    WSPD80VMAX       ij     misc        1         -      irh        "WSPD80VMAX"     "V WIND MAX 80 M"         "m s-1"
 state    real    W_UP_MAX         ij     misc        1         -      irh        "W_UP_MAX"       "MAX Z-WIND UPDRAFT"      "m s-1"
 state    real    W_DN_MAX         ij     misc        1         -      irh        "W_DN_MAX"       "MAX Z-WIND DOWNDRAFT"    "m s-1"
 state    real    REFD_MAX         ij     misc        1         -      irh        "REFD_MAX"       "MAX DERIVED RADAR REFL"  "dbZ"
-state    real    UP_HELI_MIN      ij     misc        1         -      rh02       "UP_HELI_MIN"    "MIN UPDRAFT HELICITY"    "m2 s-2"
+state    integer REFDM10C_CALC    ij     misc        1         -       -         "REFDM10C_CALC"  "RADAR REFL -10C T or F"  "dimensionless"
+state    real    REFDM10C_MAX     ij     misc        1         -      irh        "REFDM10C_MAX"   "MAX RADAR REFL AT -10C"  "dbZ"
 state    real    UP_HELI_MAX      ij     misc        1         -      irh        "UP_HELI_MAX"    "MAX UPDRAFT HELICITY"    "m2 s-2"
 state    real    UP_HELI_MAX16    ij     misc        1         -      irh        "UP_HELI_MAX16"  "MAX UPDRAFT HELICITY16"  "m2 s-2"
-state    real    UP_HELI_MAX03    ij     misc        1         -      rh02       "UP_HELI_MAX03"  "MAX UPDRAFT HELICITY 0-3km"  "m2 s-2"
-state    real    UP_HELI_MAX01    ij     misc        1         -      rh02       "UP_HELI_MAX01"  "MAX UPDRAFT HELICITY 0-1km"  "m2 s-2"
-state    real    RVORT1_MAX       ij     misc        1         -      rh02       "RVORT1_MAX"     "MAX 1KM AGL REL VORT"    "s-1"
+state    real    UP_HELI_MAX02    ij     misc        1         -      irh        "UP_HELI_MAX02"  "MAX UPDRAFT HELICITY02"  "m2 s-2"
+state    real    UP_HELI_MAX03    ij     misc        1         -      irh        "UP_HELI_MAX03"  "MAX UPDRAFT HELICITY03"  "m2 s-2"
+state    real    UP_HELI_MAX01    ij     misc        1         -      irh        "UP_HELI_MAX01"  "MAX UPDRAFT HELICITY01"  "m2 s-2"
+state    real    UP_HELI_MIN      ij     misc        1         -      irh        "UP_HELI_MIN"    "MIN UPDRAFT HELICITY"    "m2 s-2"
+state    real    UP_HELI_MIN16    ij     misc        1         -      irh        "UP_HELI_MIN16"  "MIN UPDRAFT HELICITY16"  "m2 s-2"
+state    real    UP_HELI_MIN02    ij     misc        1         -      irh        "UP_HELI_MIN02"  "MIN UPDRAFT HELICITY02"  "m2 s-2"
+state    real    UP_HELI_MIN03    ij     misc        1         -      irh        "UP_HELI_MIN03"  "MIN UPDRAFT HELICITY03"  "m2 s-2"
+state    real    rel_vort         ikj    misc        1         -      irh        "rel_vort"       "RELATIVE VORTICITY"      "s-1"
+state    real    rlv              ikj    misc        1         -      irh        "rlv"            "3d max VERTICAL VORTICITY" "s-1"
+state    real    rlvn             ikj    misc        1         -      irh        "rlvn"           "3d min VERTICAL VORTICITY" "s-1"
+state    real    rel_vort_max     ij     misc        1         -      irh        "rel_vort_max"   "MAX 0-2 KM VERTICAL VORTICITY" "s-1"
+state    real    rel_vort_max01   ij     misc        1         -      irh        "rel_vort_max01" "MAX 0-1 KM VERTICAL VORTICITY01" "s-1"
 state    real    C_PBLH           ij     misc        1         -     irh         "C_PBLH"         "Coniglio PBL Height"     "m"
 state    real    W_1KM_AGL        ij     misc        1         -     irh         "W_1KM_AGL"       "Z-WIND AT 1KM AGL"        "m s-1"
 state    real    W_MEAN           ij     misc        1         -      irh        "W_MEAN"         "HOURLY MEAN Z-WIND"      "m s-1"
+state    real    W_MEAN_SUM       ij     misc        1         -       -         "W_MEAN_SUM"     "RUNNING SUM OF MEAN Z-WIND" "m s-1"
 state    real    GRPL_MAX         ij     misc        1         -      irh        "GRPL_MAX"       "MAX COL INT GRAUPEL"     "kg m-2"
 state    real    LTG1_MAX         ij     misc        1         -      irh        "LTG1_MAX"       "MAX LTG THREAT 1"        "flashes km-2 5min-1"
 state    real    LTG2_MAX         ij     misc        1         -      irh        "LTG2_MAX"       "MAX LTG THREAT 2"        "flashes km-2 5min-1"
 state    real    LTG3_MAX         ij     misc        1         -      irh        "LTG3_MAX"       "MAX LTG THREAT 3"        "flashes km-2 5min-1"
+state    real    TOTICE_COLINT    ij     misc        1         -       -         "TOTICE_COLINT"  "COL INT TOTAL ICE"       "kg m-2"
+state    real    LTG1             ij     misc        1         -       -         "LTG1"           "LTG THREAT 1"            "flashes km-2 5min-1"
+state    real    LTG2             ij     misc        1         -       -         "LTG2"           "LTG THREAT 2"            "flashes km-2 5min-1"
+state    real    LTG3             ij     misc        1         -       -         "LTG3"           "LTG THREAT 3"            "flashes km-2 5min-1"
+state    integer LTG1_CALC        ij     misc        1         -       -         "LTG1_CALC"      "LTG1 CALCULATED T OR F"  "dimensionless"
 state    real    NCI_LTG          ij     misc        1         -      irh        "NCI_LTG"        "CONV INIT CNT LTG"       "s"
 state    real    NCA_LTG          ij     misc        1         -      irh        "NCA_LTG"        "CONV ACTIV CNT LTG"      "s"
 state    real    NCI_W            ij     misc        1         -      irh        "NCI_W"          "CONV INIT CNT W"         "s"
@@ -1868,20 +1889,15 @@ state    real    QR_MAX_CI        ij     misc        1         -      irh       
 state    real    QG_MAX_CI        ij     misc        1         -      irh        "QG_MAX_CI"      "MAX QG AT CI POINTS"     "g kg-1"
 state    real    UH               ij     misc        1         -      irh        "UH"             "UPDRAFT HELICITY"        "m2 s-2"
 state    real    UH16             ij     misc        1         -      irh        "UH16"           "UPDRAFT HELICITY16"      "m2 s-2"
-state    real    UH03             ij     misc        1         -      r          "UH03"           "UPDRAFT HELICITY 0-3KM"  "m2 s-2"
-state    real    UH01             ij     misc        1         -      r          "UH01"           "UPDRAFT HELICITY 0-1KM"  "m2 s-2"
-state    real    RVORT1           ij     misc        1         -      r          "RVORT1"         "1KM AGL REL VORT"        "s-1"
+state    real    UH02             ij     misc        1         -      irh        "UH02"           "UPDRAFT HELICITY02"      "m2 s-2"
+state    real    UH03             ij     misc        1         -      irh        "UH03"           "UPDRAFT HELICITY03"      "m2 s-2"
+state    real    UH01             ij     misc        1         -      irh        "UH01"           "UPDRAFT HELICITY01"      "m2 s-2"
 state    real    W_COLMEAN        ij     misc        1         -     -           "W_COLMEAN"      "COLUMN MEAN Z-WIND"      "m s-1"
 state    real    NUMCOLPTS        ij     misc        1         -     -           "NUMCOLPTS"      "NUMBER OF COLUMN PTS"    "dimensionless"
 state    real    GRPL_COLINT      ij     misc        1         -     -           "GRPL_COLINT"    "COL INT GRAUPEL"         "kg m-2"
-i1       real    TOTICE_COLINT    ij     misc        1         -     -           "TOTICE_COLINT"  "COL INT TOTAL ICE"       "kg m-2"
-state    real    LTG1             ij     misc        1         -     -           "LTG1"           "LTG THREAT 1"            "flashes km-2 5min-1"
-state    real    LTG2             ij     misc        1         -     -           "LTG2"           "LTG THREAT 2"            "flashes km-2 5min-1"
-state    real    LTG3             ij     misc        1         -     -           "LTG3"           "LTG THREAT 3"            "flashes km-2 5min-1"
-i1       integer LTG1_CALC        ij     misc        1         -     -           "LTG1_CALC"      "LTG1 CALCULATED T OR F"  "dimensionless"
 state    integer NTIMESTEPS       -      misc        1         -     -           "NTIMESTEPS"     "NUMBER OF TIME STEPS SINCE RESET" "dimensionless"
-state    real    HAIL_MAXK1       ij     misc        1         -     -           "HAIL_MAXK1"     "MAX HAIL DIAMETER K=1"   "m"
-state    real    HAIL_MAX2D       ij     misc        1         -     -           "HAIL_MAX2D"     "MAX HAIL DIAMETER ENTIRE COLUMN"   "m"
+state    real    HAIL_MAXK1       ij     misc        1         -      irh        "HAIL_MAXK1"     "MAX HAIL DIAMETER K=1"   "m"
+state    real    HAIL_MAX2D       ij     misc        1         -      irh        "HAIL_MAX2D"     "MAX HAIL DIAMETER ENTIRE COLUMN"   "m"
 #
 state    real    MAXCLDFRA        ij     misc        1         -     irh         "MAXCLDFRA"      "MAX CLOUD FRACTION"       "0 to 1"
 state    real    SHEAR100         ij     misc        1         -     irh         "SHEAR100"       "WSP(100 m) - WSP(k=1)"    "m s-1"
@@ -2654,7 +2670,8 @@ package   fer_mp_hires    mp_physics==5                -             moist:qv,qc
 package   fer_mp_hires_advect  mp_physics==15          -             moist:qv,qc,qr,qi;scalar:qrimef
 package   wsm6scheme      mp_physics==6                -             moist:qv,qc,qr,qi,qs,qg;state:re_cloud,re_ice,re_snow
 package   gsfcgcescheme   mp_physics==7                -             moist:qv,qc,qr,qi,qs,qg
-package   thompson        mp_physics==8                -             moist:qv,qc,qr,qi,qs,qg;scalar:qni,qnr;state:re_cloud,re_ice,re_snow,frain,acfrain
+#package   thompson        mp_physics==8                -             moist:qv,qc,qr,qi,qs,qg;scalar:qni,qnr;state:re_cloud,re_ice,re_snow,frain,acfrain
+package   thompson        mp_physics==8                -             moist:qv,qc,qr,qi,qs,qg;scalar:qni,qnr;state:re_cloud,re_ice,re_snow
 package   milbrandt2mom   mp_physics==9                -             moist:qv,qc,qr,qi,qs,qg,qh;scalar:qnc,qnr,qni,qns,qng,qnh
 package   morr_two_moment mp_physics==10               -             moist:qv,qc,qr,qi,qs,qg;scalar:qni,qns,qnr,qng;state:rqrcuten,rqscuten,rqicuten
 package   cammgmpscheme   mp_physics==11               -             moist:qv,qc,qi,qr,qs;scalar:qnc,qni,qnr,qns;state:rh_old_mp,lcd_old_mp,cldfra_old_mp,cldfra_mp,cldfra_mp_all,cldfra_conv,cldfrai,cldfral,turbtype3d,smaw3d,wsedl3d,icwmrdp3d,dp3d,shfrc3d,dlf,dlf2,tke_pbl,lradius,iradius
@@ -2667,7 +2684,8 @@ package   nssl_2momccn    mp_physics==18               -             moist:qv,qc
 package   nssl_1mom       mp_physics==19               -             moist:qv,qc,qr,qi,qs,qg,qh;scalar:qvolg
 package   nssl_1momlfo    mp_physics==21               -             moist:qv,qc,qr,qi,qs,qg
 package   nssl_2momg      mp_physics==22               -             moist:qv,qc,qr,qi,qs,qg;scalar:qndrop,qnr,qni,qns,qng,qvolg;state:re_cloud,re_ice,re_snow
-package   thompsonaero    mp_physics==28               -             moist:qv,qc,qr,qi,qs,qg;scalar:qni,qnr,qnc,qnwfa,qnifa;state:re_cloud,re_ice,re_snow,qnwfa2d,taod5503d,taod5502d,frain,acfrain
+package   thompsonaero    mp_physics==28               -             moist:qv,qc,qr,qi,qs,qg;scalar:qni,qnr,qnc,qnwfa,qnifa;state:re_cloud,re_ice,re_snow,qnwfa2d,taod5503d,taod5502d
+#package   thompsonaero    mp_physics==28               -             moist:qv,qc,qr,qi,qs,qg;scalar:qni,qnr,qnc,qnwfa,qnifa;state:re_cloud,re_ice,re_snow,qnwfa2d,taod5503d,taod5502d,frain,acfrain
 package   etampnew        mp_physics==95               -             moist:qv,qc,qr,qs;scalar:qt;state:f_ice_phy,f_rain_phy,f_rimef_phy
 
 package   radar_refl      compute_radar_ref==1         -             state:refl_10cm,refd_max
@@ -2741,7 +2759,8 @@ package   bep_bemscheme  sf_urban_physics==3         -             state:a_u_bep
 
 package   slabscheme     sf_surface_physics==1       -             -
 package   lsmscheme      sf_surface_physics==2       -             state:flx4,fvb,fbur,fgsn,smcrel
-package   ruclsmscheme   sf_surface_physics==3       -             state:smfr3d,keepfr3dflag,soilt1,rhosnf,snowfallac,precipfr
+package   ruclsmscheme   sf_surface_physics==3       -             state:smfr3d,keepfr3dflag,precipfr
+#package   ruclsmscheme   sf_surface_physics==3       -             state:smfr3d,keepfr3dflag,soilt1,rhosnf,snowfallac,precipfr
 package   noahmpscheme   sf_surface_physics==4       -             state:isnowxy,tvxy,tgxy,canliqxy,canicexy,eahxy,tahxy,cmxy,chxy,fwetxy,sneqvoxy,alboldxy,qsnowxy,wslakexy,zwtxy,waxy,wtxy,tsnoxy,zsnsoxy,snicexy,snliqxy,lfmassxy,rtmassxy,stmassxy,woodxy,stblcpxy,fastcpxy,xsaixy,taussxy,t2mvxy,t2mbxy,q2mvxy,q2mbxy,tradxy,neexy,gppxy,nppxy,fvegxy,qinxy,runsfxy,runsbxy,ecanxy,edirxy,etranxy,fsaxy,firaxy,aparxy,psnxy,savxy,sagxy,rssunxy,rsshaxy,bgapxy,wgapxy,tgvxy,tgbxy,chvxy,chbxy,shgxy,shcxy,shbxy,evgxy,evbxy,ghvxy,ghbxy,irgxy,ircxy,irbxy,trxy,evcxy,chleafxy,chucxy,chv2xy,chb2xy,chstarxy,smoiseq,smcwtdxy,rechxy,deeprechxy,fdepthxy,areaxy,rivercondxy,riverbedxy,eqzwt,pexpxy,qrfxy,qrfsxy,qspringxy,qspringsxy,qslatxy,stepwtd
 package   clmscheme      sf_surface_physics==5       -             state:numc,nump,sabv,sabg,lwup,lhsoi,lhveg,lhtran,snl,snowdp,wtc,wtp,h2osno,t_grnd,t_veg,h2ocan,h2ocan_col,t2m_max,t2m_min,t2clm,t_ref2m,h2osoi_liq_s1,h2osoi_liq_s2,h2osoi_liq_s3,h2osoi_liq_s4,h2osoi_liq_s5,h2osoi_liq1,h2osoi_liq2,h2osoi_liq3,h2osoi_liq4,h2osoi_liq5,h2osoi_liq6,h2osoi_liq7,h2osoi_liq8,h2osoi_liq9,h2osoi_liq10,h2osoi_ice_s1,h2osoi_ice_s2,h2osoi_ice_s3,h2osoi_ice_s4,h2osoi_ice_s5,h2osoi_ice1,h2osoi_ice2,h2osoi_ice3,h2osoi_ice4,h2osoi_ice5,h2osoi_ice6,h2osoi_ice7,h2osoi_ice8,h2osoi_ice9,h2osoi_ice10,t_soisno_s1,t_soisno_s2,t_soisno_s3,t_soisno_s4,t_soisno_s5,t_soisno1,t_soisno2,t_soisno3,t_soisno4,t_soisno5,t_soisno6,t_soisno7,t_soisno8,t_soisno9,t_soisno10,dzsnow1,dzsnow2,dzsnow3,dzsnow4,dzsnow5,snowrds1,snowrds2,snowrds3,snowrds4,snowrds5,t_lake1,t_lake2,t_lake3,t_lake4,t_lake5,t_lake6,t_lake7,t_lake8,t_lake9,t_lake10,h2osoi_vol1,h2osoi_vol2,h2osoi_vol3,h2osoi_vol4,h2osoi_vol5,h2osoi_vol6,h2osoi_vol7,h2osoi_vol8,h2osoi_vol9,h2osoi_vol10,albedosubgrid,lhsubgrid,hfxsubgrid,lwupsubgrid,q2subgrid,sabvsubgrid,sabgsubgrid,nrasubgrid,swupsubgrid
 package   pxlsmscheme    sf_surface_physics==7       -             state:t2_ndg_new,q2_ndg_new,t2_ndg_old,q2_ndg_old,vegf_px,imperv,canfra
@@ -2854,7 +2873,7 @@ package   wenopd_scalar  moist_adv_opt==4            -             -
 package   maxmin_output  output_diagnostics==1            -    state:t2min,t2max,tt2min,tt2max,t2mean,t2std,q2min,q2max,tq2min,tq2max,q2mean,q2std,skintempmin,skintempmax,tskintempmin,tskintempmax,skintempmean,skintempstd,u10max,v10max,spduv10max,tspduv10max,u10mean,v10mean,spduv10mean,u10std,v10std,spduv10std,raincvmax,rainncvmax,traincvmax,trainncvmax,raincvmean,rainncvmean,raincvstd,rainncvstd,swradmin,swradmax,tswradmin,tswradmax,swradmean,swradstd
 
 #package   nwp_output     nwp_diagnostics==1            -       state:wspd10max,w_up_max,w_dn_max,up_heli_max,w_mean,grpl_max,hail_maxk1,hail_max2d
-package   nwp_output     nwp_diagnostics==1            -       state:wspd10max,w_up_max,w_dn_max,w_1km_agl,refd_max,refl_10cm,up_heli_max,up_heli_max16,up_heli_min,up_heli_max03,up_heli_max01,rvort1_max,w_mean,grpl_max,ltg1_max,ltg2_max,ltg3_max,nci_ltg,nca_ltg,nci_w,nca_w,nci_wq,nca_wq,nci_refd,nca_refd,qr_max_ci,qg_max_ci,uh,uh16,hail_maxk1,hail_max2d
+package   nwp_output     nwp_diagnostics==1            -       state:wspd10max,wspd10umax,wspd10vmax,wspd80max,wspd80umax,wspd80vmax,w_up_max,w_dn_max,w_1km_agl,refd_max,refdm10c_max,refl_10cm,up_heli_max,up_heli_min,up_heli_max16,up_heli_min16,up_heli_max02,up_heli_min02,up_heli_max03,up_heli_min03,up_heli_max01,rel_vort_max,rel_vort_max01,w_mean,grpl_max,ltg1_max,ltg2_max,ltg3_max,nci_ltg,nca_ltg,nci_w,nca_w,nci_wq,nca_wq,nci_refd,nca_refd,qr_max_ci,qg_max_ci,uh,uh16,uh02,uh03,hail_maxk1,hail_max2d
 
 package   dfi_setup      dfi_stage==0                -             -
 package   dfi_bck        dfi_stage==1                -             -

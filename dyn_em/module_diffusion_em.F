@@ -6012,11 +6012,15 @@ END SUBROUTINE phy_bc
 
     END SUBROUTINE compute_diff_metrics
 
-    SUBROUTINE cal_helicity ( config_flags, u, v, w, uh, uh03, uh01, rvort1, up_heli_max,&
-                                   up_heli_min, up_heli_max03,       &
-                                   up_heli_max01,                    &
-                                   rvort1_max,                       &
-                                   uh16, up_heli_max16,              &
+    SUBROUTINE cal_helicity ( config_flags,itimestep,dt,u, v, w, uh, uh16,       &
+                                   uh02, uh03, up_heli_max,          &
+                                   up_heli_max16, up_heli_max03,     &
+                                   up_heli_max02, up_heli_min,       &
+                                   up_heli_min16, up_heli_min03,     &
+                                   up_heli_min02, rel_vort,          &
+                                   rel_vort_max, rel_vort_max01,     &
+                                   uh01, up_heli_max01,              &
+                                   z, rlv, rlvn,                     &
                                    ph, phb,                          &
                                    msfux, msfuy,                     &
                                    msfvx, msfvy,                     &
@@ -6063,11 +6067,31 @@ END SUBROUTINE phy_bc
     ::  u, v, w, ph, phb, zx, zy, rdz, rdzw
 
     REAL, DIMENSION( ims:ime, jms:jme ), INTENT( INOUT )  &
-    :: uh,  uh03, uh01, rvort1, up_heli_max, up_heli_min, up_heli_max03, &
-       up_heli_max01, rvort1_max
+    :: uh, uh16, uh02, uh03, up_heli_max, up_heli_min, uh01, up_heli_max01
 
     REAL, DIMENSION( ims:ime, jms:jme ), INTENT( INOUT )  &
-    :: uh16, up_heli_max16
+    :: up_heli_max16, up_heli_min16
+
+    REAL, DIMENSION( ims:ime, jms:jme ), INTENT( INOUT )  &
+    :: up_heli_max02, up_heli_min02, up_heli_max03, up_heli_min03
+
+    REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT( INOUT )  & 
+    :: rel_vort
+
+! JCJR varstart
+    REAL, DIMENSION( ims:ime, jms:jme ), INTENT( INOUT )  & 
+    :: rel_vort_max, rel_vort_max01
+    REAL, DIMENSION( ims:ime, jms:jme ) :: rvm
+    INTEGER :: idump
+    REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT( IN )  & 
+    :: z 
+    REAL, DIMENSION(ims:ime,kms:kme,jms:jme), INTENT(INOUT) &
+    :: rlv,rlvn
+    REAL, DIMENSION(ims:ime,kms:kme,jms:jme) :: & 
+      rlv_old,rlv_nold
+!JCJR varend
+    INTEGER, INTENT(IN) :: itimestep
+    REAL, INTENT(IN) :: dt 
 
 ! Local variables.
 
@@ -6078,7 +6102,7 @@ END SUBROUTINE phy_bc
     :: tmp, tmpzx, tmpzy, tmpzeta_z, cft1, cft2
 
     REAL  &
-    :: zl, zu, uh_smth
+    :: zagl, zl, zu, uh_smth
 
     REAL, DIMENSION( its-3:ite+3, jts-3:jte+3 )  :: mm, zzavg, zeta_zd12
 
@@ -6089,13 +6113,13 @@ END SUBROUTINE phy_bc
     :: wavg, rvort
 
     LOGICAL, DIMENSION( its-3:ite+3, jts-3:jte+3 )  &
-    :: use_column, use_column03, use_column01
+    :: use_column, use_column01
 
     REAL  &
-    :: uh_smth16
+    :: uh_smth16, uh_smth02, uh_smth03
 
     LOGICAL, DIMENSION( its-3:ite+3, jts-3:jte+3 )  &
-    :: use_column16
+    :: use_column16, use_column02, use_column03
 
 ! End declarations.
 !-----------------------------------------------------------------------
@@ -6221,6 +6245,7 @@ END SUBROUTINE phy_bc
     DO i = i_start, i_end
       rvort(i,k,j) = mm(i,j) * (  &
                      rdx * ( hat(i,k,j) - hat(i-1,k,j) ) - tmp1(i,k,j) )
+      rel_vort(i,k,j) = rvort(i,k,j)
     END DO
     END DO
     END DO
@@ -6300,6 +6325,7 @@ END SUBROUTINE phy_bc
       rvort(i,k,j) = rvort(i,k,j) -  &
                      mm(i,j) * (  &
                      rdy * ( hat(i,k,j) - hat(i,k,j-1) ) - tmp1(i,k,j) )
+      rel_vort(i,k,j) = rvort(i,k,j)
     END DO
     END DO
     END DO
@@ -6314,6 +6340,7 @@ END SUBROUTINE phy_bc
        DO j = jts, jte
        DO k = kts, kte
          rvort(ids,k,j) = rvort(ids+1,k,j)
+         rel_vort(ids,k,j) = rel_vort(ids+1,k,j)
        END DO
        END DO
      END IF
@@ -6322,6 +6349,7 @@ END SUBROUTINE phy_bc
        DO k = kts, kte
        DO i = its, ite
          rvort(i,k,jds) = rvort(i,k,jds+1)
+         rel_vort(i,k,jds) = rel_vort(i,k,jds+1)
        END DO
        END DO
      END IF
@@ -6330,6 +6358,7 @@ END SUBROUTINE phy_bc
        DO j = jts, jte
        DO k = kts, kte
          rvort(ide,k,j) = rvort(ide-1,k,j)
+         rel_vort(ide,k,j) = rel_vort(ide-1,k,j)
        END DO
        END DO
      END IF
@@ -6338,6 +6367,7 @@ END SUBROUTINE phy_bc
        DO k = kts, kte
        DO i = its, ite
          rvort(i,k,jde) = rvort(i,k,jde-1)
+         rel_vort(i,k,jde) = rel_vort(i,k,jde-1)
        END DO
        END DO
      END IF
@@ -6367,15 +6397,19 @@ END SUBROUTINE phy_bc
 !-----------------------------------------------------------------------
 ! Complete the updraft helicity calculation, only including columns with
 ! positive vertical velocity between the 2000 m and 5000 m levels.
+!JCJR start
+    !itimestep = grid%itimestep
+    !history_interval = config_flags%history_interval
+    !dt = grid%dt
+!mhu    idump = (config_flags%reset_interval1 * 60) / grid%dt
+    idump = (config_flags%reset_interval1 * 60) / dt
+!JCJR end
 
     DO j = j_start, j_end
     DO i = i_start, i_end
       use_column(i,j) = .true.
-      use_column03(i,j) = .true.
       use_column01(i,j) = .true.
-      uh03(i,j) = 0.
       uh01(i,j) = 0.
-      rvort1(i,j) = 0.
       uh(i,j) = 0.
 
 ! These fields are for a test of the updraft helicity betweeen the
@@ -6383,8 +6417,83 @@ END SUBROUTINE phy_bc
 
       use_column16(i,j) = .true.
       uh16(i,j) = 0.
+
+! These fields are for a test of the updraft helicity betweeen the
+! 0 m and 2000 m, 0 m and 3000 m levels.
+      use_column02(i,j) = .true.
+      uh02(i,j) = 0.
+      use_column03(i,j) = .true.
+      uh03(i,j) = 0.
+
+!JCJR start full 3d uh and uhmax positive and negative
+!mhu  IF ( MOD((grid%itimestep - 1), idump) .eq. 0 ) THEN !only doing this on output
+    IF ( MOD((itimestep - 1), idump) .eq. 0 ) THEN !only doing this on output
+                                                   !not init code
+       !update the 5 minute max values
+       rvm(i,j) = 0.
+       !now do the previous time step init rel_vort reset
+       do k = kts,ktf
+          if (rel_vort(i,k,j) .ge. 0.) then
+             rlv(i,k,j) = rel_vort(i,k,j)
+          else
+             rlv(i,k,j) = 0.
+          end if
+          if (rel_vort(i,k,j) .le. 0.) then
+             rlvn(i,k,j) = rel_vort(i,k,j)
+          else
+             rlvn(i,k,j) = 0.
+          end if
+        end do
+    ELSE
+       !update the 5 minute min/max values
+       rvm(i,j) = rel_vort_max(i,j)
+       do k = kts,ktf
+          rlv_old(i,k,j) = rlv(i,k,j) !last max relvort value
+          rlv_nold(i,k,j) = rlvn(i,k,j)
+          !rlv(i,k,j) = 0.
+          !rlvn(i,k,j) = 0.
+        end do
+    ENDIF
     END DO
     END DO
+    ! Update the boundary for rlv_old rlv_nold
+   IF ( .NOT. config_flags%periodic_x .AND. i_start .EQ. ids+1 ) THEN
+      DO j = jts, jte
+      DO k = kts, kte
+        rlv_old(ids,k,j) = rlv_old(ids+1,k,j)
+        rlv_nold(ids,k,j) = rlv_nold(ids+1,k,j)
+      END DO
+      END DO
+    END IF
+
+    IF ( .NOT. config_flags%periodic_y .AND. j_start .EQ. jds+1) THEN
+      DO k = kts, kte
+      DO i = its, ite
+        rlv_old(i,k,jds) = rlv_old(i,k,jds+1)
+        rlv_nold(i,k,jds) = rlv_nold(i,k,jds+1)
+      END DO
+      END DO
+    END IF
+
+    IF ( .NOT. config_flags%periodic_x .AND. i_end .EQ. ide-1) THEN
+      DO j = jts, jte
+      DO k = kts, kte
+        rlv_old(ide,k,j) = rlv_old(ide-1,k,j)
+        rlv_nold(ide,k,j) = rlv_nold(ide-1,k,j)
+      END DO
+      END DO
+    END IF
+
+    IF ( .NOT. config_flags%periodic_y .AND. j_end .EQ. jde-1) THEN
+      DO k = kts, kte
+      DO i = its, ite
+        rlv_old(i,k,jde) = rlv_old(i,k,jde-1)
+        rlv_nold(i,k,jde) = rlv_nold(i,k,jde-1)
+      END DO
+      END DO
+    END IF
+
+!JCJR end
 
     !  We want zl and zu to be the height above ground, so we subtract
     !  the terrain elevation from the geopotential/g.
@@ -6403,7 +6512,14 @@ END SUBROUTINE phy_bc
            (( ph(i-1,k+1,j  ) + phb(i-1,k+1,j  ) ) / g - ht(i-1,j  ) ) +  &
            (( ph(i  ,k+1,j-1) + phb(i  ,k+1,j-1) ) / g - ht(i  ,j-1) ) +  &
            (( ph(i-1,k+1,j-1) + phb(i-1,k+1,j-1) ) / g - ht(i-1,j-1) ) ) )
-
+!JCJR relative vorticity
+!     rel_vort(i,k,j) = ((rvort(i,k,j) + rvort(i,k+1,j))/.5) * (zu-zl)
+      if (rel_vort(i,k,j) .gt. 0 .and. rel_vort(i,k,j) .gt. rlv_old(i,k,j)) then
+         rlv(i,k,j) = rel_vort(i,k,j)
+      else if (rel_vort(i,k,j) .lt. 0 .and. rel_vort(i,k,j) .lt. rlv_nold(i,k,j)) then
+         rlvn(i,k,j) = rel_vort(i,k,j)
+      end if
+!JCJR end
       IF ( zl .GE. 2000. .AND. zu .LE. 5000. ) THEN
         IF ( wavg(i,k,j) .GT. 0. .AND. wavg(i,k+1,j) .GT. 0. ) THEN
           uh(i,j) = uh(i,j) + ( ( wavg(i,k,j) * rvort(i,k,j) + &
@@ -6414,41 +6530,6 @@ END SUBROUTINE phy_bc
           uh(i,j) = 0.
         ENDIF
       ENDIF
-
-! UH 0-1, 0-3, RVORT1_max from RAS
-      IF ( zl .GE. 0. .AND. zu .LE. 3000. ) THEN
-        IF ( wavg(i,k,j) .GT. 0. .AND. wavg(i,k+1,j) .GT. 0. ) THEN
-          uh03(i,j) = uh03(i,j) + ( ( wavg(i,k,j) * rvort(i,k,j) + &
-                    wavg(i,k+1,j) * rvort(i,k+1,j) ) * 0.5 ) &
-                    * ( zu - zl )
-        ELSE
-          use_column03(i,j) = .false.
-          uh03(i,j) = 0.
-        ENDIF
-      ENDIF
-
-      IF ( zl .GE. 0. .AND. zu .LE. 1000. ) THEN
-        IF ( wavg(i,k,j) .GT. 0. .AND. wavg(i,k+1,j) .GT. 0. ) THEN
-          uh01(i,j) = uh01(i,j) + ( ( wavg(i,k,j) * rvort(i,k,j) + &
-                    wavg(i,k+1,j) * rvort(i,k+1,j) ) * 0.5 ) &
-                    * ( zu - zl )
-        ELSE
-          use_column01(i,j) = .false.
-          uh01(i,j) = 0.
-        ENDIF
-      ENDIF
-
-     ! ---
-     ! Add code here to compute hourly-max 1km vorticity
-     IF (zl .LE. 1000. .AND. zu .GE. 1000.) THEN
-        !rvort1(i,j) = (rvort(i,k,j) + rvort(i,k+1,j))*0.5
-        rvort1(i,j) = rvort(i,k,j) + (rvort(i,k+1,j) - rvort(i,k,j))*((1000-zl)/(zu-zl))
-        IF ( rvort1(i,j) .GT. rvort1_max(i,j) ) THEN
-           rvort1_max(i,j) = rvort1(i,j)
-        ENDIF
-     ENDIF
-     !---
-
 ! These fields are for a test of the updraft helicity betweeen the
 ! 1000 m and 6000 m levels.
 
@@ -6462,6 +6543,45 @@ END SUBROUTINE phy_bc
           uh16(i,j) = 0.
         ENDIF
       ENDIF
+
+! These fields are for a test of the updraft helicity betweeen the
+! 0 m and 2000 m levels and 0 m and 3000 m.
+
+     IF ( zl .GE. 0. .AND. zu .LE. 2000. ) THEN
+        IF ( wavg(i,k,j) .GT. 0. .AND. wavg(i,k+1,j) .GT. 0. ) THEN
+          uh02(i,j) = uh02(i,j) + ( ( wavg(i,k,j) * rvort(i,k,j) + &
+                    wavg(i,k+1,j) * rvort(i,k+1,j) ) * 0.5 ) &
+                    * ( zu - zl )
+        ELSE
+          use_column02(i,j) = .false.
+          uh02(i,j) = 0.
+        ENDIF
+     ENDIF
+
+     IF ( zl .GE. 0. .AND. zu .LE. 3000. ) THEN
+        IF ( wavg(i,k,j) .GT. 0. .AND. wavg(i,k+1,j) .GT. 0. ) THEN
+          uh03(i,j) = uh03(i,j) + ( ( wavg(i,k,j) * rvort(i,k,j) + &
+                    wavg(i,k+1,j) * rvort(i,k+1,j) ) * 0.5 ) &
+                    * ( zu - zl )
+        ELSE
+          use_column03(i,j) = .false.
+          uh03(i,j) = 0.
+        ENDIF
+     ENDIF
+
+! UH 0-1, RVORT1_max from RAS
+      IF ( zl .GE. 0. .AND. zu .LE. 1000. ) THEN
+        IF ( wavg(i,k,j) .GT. 0. .AND. wavg(i,k+1,j) .GT. 0. ) THEN
+          uh01(i,j) = uh01(i,j) + ( ( wavg(i,k,j) * rvort(i,k,j) + &
+                    wavg(i,k+1,j) * rvort(i,k+1,j) ) * 0.5 ) &
+                    * ( zu - zl )
+        ELSE
+          use_column01(i,j) = .false.
+          uh01(i,j) = 0.
+        ENDIF
+      ENDIF
+ 
+
     END DO
     END DO
     END DO
@@ -6478,13 +6598,15 @@ END SUBROUTINE phy_bc
 
       IF ( use_column(i,j) .and. uh_smth .GT. up_heli_max(i,j) ) THEN
         up_heli_max(i,j) = uh_smth
-      ELSE IF ( uh_smth .LT. up_heli_min(i,j) ) THEN
-           up_heli_min(i,j) = uh_smth
       ENDIF
 
-!     IF ( up_heli_max(i,j) .GT. 1.0e+3 ) THEN
-!       print *,' i,j,up_heli_max = ', i,j,up_heli_max(i,j)
-!     ENDIF
+      IF ( use_column(i,j) .and. uh_smth .LT. up_heli_min(i,j) ) THEN
+        up_heli_min(i,j) = uh_smth
+      ENDIF
+
+      IF ( up_heli_max(i,j) .GT. 1.0e+3 ) THEN
+        print *,' i,j,up_heli_max = ', i,j,up_heli_max(i,j)
+      ENDIF
 
 ! These fields are for a test of the updraft helicity betweeen the
 ! 1000 m and 6000 m levels.
@@ -6499,26 +6621,45 @@ END SUBROUTINE phy_bc
         up_heli_max16(i,j) = uh_smth16
       ENDIF
 
+      IF ( use_column16(i,j) .and. uh_smth16 .LT. up_heli_min16(i,j) ) THEN
+        up_heli_min16(i,j) = uh_smth16
+      ENDIF
+
+! These fields are for a test of the updraft helicity betweeen the
+! 0 m and 2000 m and 0 m and 3000 m levels.
+
+      uh_smth02 = 0.25   *   uh02(i  ,j  ) + &
+        .125  * ( uh02(i+1,j  ) + uh02(i-1,j  ) + &
+                             uh02(i  ,j+1) + uh02(i  ,j-1) ) + &
+                             .0625 * ( uh02(i+1,j+1) + uh02(i+1,j-1) + &
+                             uh02(i-1,j+1) + uh02(i-1,j-1) )
+
+      IF ( use_column02(i,j) .and. uh_smth02 .GT. up_heli_max02(i,j) ) THEN
+        up_heli_max02(i,j) = uh_smth02
+      ENDIF
+
+      IF ( use_column02(i,j) .and. uh_smth02 .LT. up_heli_min02(i,j) ) THEN
+        up_heli_min02(i,j) = uh_smth02
+      ENDIF
+
+      uh_smth03 = 0.25   *   uh03(i  ,j  ) + &
+        .125  * ( uh03(i+1,j  ) + uh03(i-1,j  ) + &
+                             uh03(i  ,j+1) + uh03(i  ,j-1) ) + &
+                             .0625 * ( uh03(i+1,j+1) + uh03(i+1,j-1) + &
+                             uh03(i-1,j+1) + uh03(i-1,j-1) )
+
+      IF ( use_column03(i,j) .and. uh_smth03 .GT. up_heli_max03(i,j) ) THEN
+        up_heli_max03(i,j) = uh_smth03
+      ENDIF
+
+      IF ( use_column03(i,j) .and. uh_smth03 .LT. up_heli_min03(i,j) ) THEN
+        up_heli_min03(i,j) = uh_smth03
+      ENDIF
+
+
 !     IF ( up_heli_max(i,j) .GT. 1.0e+3 ) THEN
 !       print *,' i,j,up_heli_max = ', i,j,up_heli_max(i,j)
 !     ENDIF
-    END DO
-    END DO
-
-    DO j = MAX(jds+1,jts),MIN(jde-2,jte)
-    DO i = MAX(ids+1,its),MIN(ide-2,ite)
-      uh_smth = 0.25   *   uh03(i  ,j  ) + &
-                0.125  * ( uh03(i+1,j  ) + uh03(i-1,j  ) + &
-                           uh03(i  ,j+1) + uh03(i  ,j-1) ) + &
-                0.0625 * ( uh03(i+1,j+1) + uh03(i+1,j-1) + &
-                           uh03(i-1,j+1) + uh03(i-1,j-1) )
-
-      IF ( use_column03(i,j) ) THEN
-        IF ( uh_smth .GT. up_heli_max03(i,j) ) THEN
-           up_heli_max03(i,j) = uh_smth
-        ENDIF
-      ENDIF
-
     END DO
     END DO
 
@@ -6541,6 +6682,30 @@ END SUBROUTINE phy_bc
 
 ! End addition of the average w calculation for updraft helicity.
 !-----------------------------------------------------------------------
+! JCJR time step update of relvortmax
+      DO j = jts, jte
+      DO i = its, ite
+        !DO k=kms,kme
+        DO k=kts+1,ktf
+          zagl = z(i,k,j) - ht(i,j)
+          IF ( zagl .lt. 2001.0) THEN
+            IF ( rel_vort(i,k,j) .gt. rvm(i,j) ) THEN
+              rel_vort_max(i,j) = rel_vort(i,k,j)
+            ELSE ! previous value
+              rel_vort_max(i,j) = rvm(i,j)
+            END IF
+          ENDIF
+          IF ( zagl .lt. 1001.0) THEN
+            IF ( rel_vort(i,k,j) .gt. rvm(i,j) ) THEN
+              rel_vort_max01(i,j) = rel_vort(i,k,j)
+            ELSE ! previous value
+              rel_vort_max01(i,j) = rvm(i,j)
+            END IF
+          ENDIF
+        END DO
+      END DO
+    END DO
+!JCJR
 
 !-----------------------------------------------------------------------
 ! Update the boundary for updraft helicity (might need to change later).
@@ -6549,8 +6714,19 @@ END SUBROUTINE phy_bc
       DO j = jts, jte
       DO k = kts, kte
 !        rvort(ids,k,j) = rvort(ids+1,k,j)
+        rlv(ids,k,j) = rlv(ids+1,k,j)
+        rlvn(ids,k,j) = rlvn(ids+1,k,j)
+        rel_vort_max(ids,j) = rel_vort_max(ids+1,j) 
+        rel_vort_max01(ids,j) = rel_vort_max01(ids+1,j)
         up_heli_max(ids,j) = up_heli_max(ids+1,j)
+        up_heli_min(ids,j) = up_heli_min(ids+1,j)
         up_heli_max16(ids,j) = up_heli_max16(ids+1,j)
+        up_heli_min16(ids,j) = up_heli_min16(ids+1,j)
+        up_heli_max02(ids,j) = up_heli_max02(ids+1,j)
+        up_heli_min02(ids,j) = up_heli_min02(ids+1,j)
+        up_heli_max03(ids,j) = up_heli_max03(ids+1,j)
+        up_heli_min03(ids,j) = up_heli_min03(ids+1,j)
+
       END DO
       END DO
     END IF
@@ -6559,8 +6735,18 @@ END SUBROUTINE phy_bc
       DO k = kts, kte
       DO i = its, ite
 !        rvort(i,k,jds) = rvort(i,k,jds+1)
+        rlv(i,k,jds) = rlv(i,k,jds+1)
+        rlvn(i,k,jds) = rlvn(i,k,jds+1)
+        rel_vort_max(i,jds) = rel_vort_max(i,jds+1)
+        rel_vort_max01(i,jds) = rel_vort_max01(i,jds+1)
         up_heli_max(i,jds) = up_heli_max(i,jds+1)
+        up_heli_min(i,jds) = up_heli_min(i,jds+1)
         up_heli_max16(i,jds) = up_heli_max16(i,jds+1)
+        up_heli_min16(i,jds) = up_heli_min16(i,jds+1)
+        up_heli_max02(i,jds) = up_heli_max02(i,jds+1)
+        up_heli_min02(i,jds) = up_heli_min02(i,jds+1)
+        up_heli_max03(i,jds) = up_heli_max03(i,jds+1)
+        up_heli_min03(i,jds) = up_heli_min03(i,jds+1)
       END DO
       END DO
     END IF
@@ -6569,8 +6755,18 @@ END SUBROUTINE phy_bc
       DO j = jts, jte
       DO k = kts, kte
 !        rvort(ide,k,j) = rvort(ide-1,k,j)
+        rlv(ide,k,j) = rlv(ide-1,k,j)
+        rlvn(ide,k,j) = rlvn(ide-1,k,j)
+        rel_vort_max(ide,j) = rel_vort_max(ide-1,j)
+        rel_vort_max01(ide,j) = rel_vort_max01(ide-1,j)
         up_heli_max(ide,j) = up_heli_max(ide-1,j)
+        up_heli_min(ide,j) = up_heli_min(ide-1,j)
         up_heli_max16(ide,j) = up_heli_max16(ide-1,j)
+        up_heli_min16(ide,j) = up_heli_min16(ide-1,j)
+        up_heli_max02(ide,j) = up_heli_max02(ide-1,j)
+        up_heli_min02(ide,j) = up_heli_min02(ide-1,j)
+        up_heli_max03(ide,j) = up_heli_max03(ide-1,j)
+        up_heli_min03(ide,j) = up_heli_min03(ide-1,j)
       END DO
       END DO
     END IF
@@ -6579,8 +6775,18 @@ END SUBROUTINE phy_bc
       DO k = kts, kte
       DO i = its, ite
 !        rvort(i,k,jde) = rvort(i,k,jde-1)
+        rlv(i,k,jde) = rlv(i,k,jde-1)
+        rlvn(i,k,jde) = rlvn(i,k,jde-1)
+        rel_vort_max(i,jde) = rel_vort_max(i,jde-1)
+        rel_vort_max01(i,jde) = rel_vort_max01(i,jde-1)
         up_heli_max(i,jde) = up_heli_max(i,jde-1)
+        up_heli_min(i,jde) = up_heli_min(i,jde-1)
         up_heli_max16(i,jde) = up_heli_max16(i,jde-1)
+        up_heli_min16(i,jde) = up_heli_min16(i,jde-1)
+        up_heli_max02(i,jde) = up_heli_max02(i,jde-1)
+        up_heli_min02(i,jde) = up_heli_min02(i,jde-1)
+        up_heli_max03(i,jde) = up_heli_max03(i,jde-1)
+        up_heli_min03(i,jde) = up_heli_min03(i,jde-1)
       END DO
       END DO
     END IF

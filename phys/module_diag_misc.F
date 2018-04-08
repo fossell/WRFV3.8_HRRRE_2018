@@ -9,6 +9,7 @@ END MODULE module_diag_misc
 !
 
 MODULE module_diag_misc
+      USE module_model_constants
       PRIVATE :: WGAMMA
       PRIVATE :: GAMMLN
 CONTAINS
@@ -188,28 +189,31 @@ CONTAINS
                      ,itimestep                                       &
                      ,ntimesteps                                      &
                      ,t,u10,v10,w,u_phy,v_phy,p,pb                    &
-                     ,wspd10max                                       &
+                     ,wspd10max,wspd10umax,wspd10vmax                 &
+                     ,wspd80max,wspd80umax,wspd80vmax                 &
                      ,wspd10,wspd80,LWP,IWP,maxcldfra,shear100,dt100  &
-                     ,up_heli_min                                     &
-                     ,up_heli_max03                                   &
+                     ,up_heli_max,up_heli_min                         &
+                     ,up_heli_max16,up_heli_min16                     &
+                     ,up_heli_max02,up_heli_min02                     &
+                     ,up_heli_max03,up_heli_min03                     &
                      ,up_heli_max01                                   &
-                     ,rvort1_max                                      &
+                     ,rel_vort_max,rel_vort_max01                     &
                      ,c_pblh,qv_curr,th2,q2,psfc                      & ! NY PBL
-                     ,up_heli_max                                     &
-                     ,up_heli_max16                                   &
-                     ,w_up_max,w_dn_max                               &
                      ,w_1km_agl                                       &
+                     ,w_up_max,w_dn_max                               &
                      ,znw,w_colmean                                   &
-                     ,numcolpts,w_mean                                &
+                     ,numcolpts,w_mean_sum,w_mean                     &
                      ,grpl_max,grpl_colint,refd_max,refl_10cm         &
+                     ,refdm10c_max,refdm10c_calc                      &
+                     ,ltg1_max,ltg2_max,ltg3_max                      &
+                     ,ltg1,ltg2,ltg3                                  &
+                     ,ltg1_calc                                       &
+                     ,totice_colint,msft                              &
                      ,refl_10cm_1km,refl_10cm_4km,composite_refl_10cm & ! dcd
                      ,ht                                              & ! dcd
                      ,hail_maxk1,hail_max2d                           &
-                     ,ltg1_max,ltg2_max,ltg3_max                      &
-                     ,ltg1,ltg2,ltg3                                  &
-                     ,msft,qs_curr                                    &
                      ,qc_curr,qi_curr                                 &
-                     ,qg_curr                                         &
+                     ,qg_curr,qs_curr                                 &
                      ,ng_curr,qh_curr,nh_curr,qr_curr,nr_curr         & !  Optional (gthompsn)
                      ,rho,ph,phb,g                                    &
                      ,CLDFRA, icloud_bl, CLDFRA_BL, QC_BL            & !Optional
@@ -407,8 +411,8 @@ CONTAINS
    REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT(IN) ::   &
                                                               w  &
                                                           ,temp  &
-                                                       ,qg_curr  &
-                                       ,qs_curr,qc_curr,qi_curr  &
+                                               ,qs_curr,qg_curr  &
+                                               ,qc_curr,qi_curr  &
                                                            ,rho  &
                                                         ,ph,phb  &
                                                           ,p,pb  &
@@ -423,25 +427,28 @@ CONTAINS
    REAL, DIMENSION( ims:ime, jms:jme ), INTENT(IN) ::            &
                                                             u10  &
                                                            ,v10  &
-                                                           ,msft
+                                                           ,msft   
 
    REAL, INTENT(IN) :: g
 
    REAL, DIMENSION( ims:ime , jms:jme ), INTENT(INOUT) ::        &
-                                                      wspd10max  &
-                                                   ,up_heli_min  &
-                                                   ,up_heli_max  &
-                                                 ,up_heli_max16  &
-                                                 ,up_heli_max03  &
+                                wspd10max,wspd10umax,wspd10vmax  &
+                               ,wspd80max,wspd80umax,wspd80vmax  &                        
+                                       ,up_heli_max,up_heli_min  &
+                                   ,up_heli_max16,up_heli_min16  &
+                                   ,up_heli_max02,up_heli_min02  &
+                                   ,up_heli_max03,up_heli_min03  &
+                                   ,rel_vort_max,rel_vort_max01  &
                                                  ,up_heli_max01  &
-                                                   ,rvort1_max   &
                                              ,w_up_max,w_dn_max  &
-                                    ,w_colmean,numcolpts,w_mean  &
+                         ,w_colmean,numcolpts,w_mean_sum,w_mean  &
                                           ,grpl_max,grpl_colint  &
                                          ,hail_maxk1,hail_max2d  &
                                                       ,refd_max  &
+                                                  ,refdm10c_max  &
                                     ,ltg1_max,ltg2_max,ltg3_max  &
                                                 ,ltg1,ltg2,ltg3  &
+                                                 ,totice_colint  &
                                                         ,c_pblh  &
                                                      ,w_1km_agl  &
                ,refl_10cm_1km,refl_10cm_4km,composite_refl_10cm  &  ! dcd
@@ -450,11 +457,13 @@ CONTAINS
                                       ,maxcldfra,shear100,dt100
    INTEGER, INTENT(INOUT) ::           ntimesteps
 
-! NY vars
-   REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT(IN) :: qv_curr 
+   REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT(IN) :: qv_curr
    REAL, DIMENSION( ims:ime, jms:jme ), INTENT(IN) :: th2, q2, psfc
    REAL, DIMENSION(ims:ime,kms:kme,jms:jme):: temp_qg, temp_ng, temp_qr, temp_nr
    REAL, DIMENSION(kps:kpe) :: press_temp, zasl_temp, tv
+
+   INTEGER, DIMENSION( ims:ime, jms:jme ), INTENT(INOUT) ::      &    
+                                        ltg1_calc,refdm10c_calc
 
    REAL                   :: tv_sum_25hpa, tv_avg_25hpa, tv2m
    INTEGER                :: indx_25hpa, indx_pblh
@@ -462,31 +471,36 @@ CONTAINS
    INTEGER :: idump
 
    REAL :: time_minutes
+   REAL :: afrac
    REAL :: uh, vh, wind_vel
    REAL :: depth
    REAL :: zl, zu
+   REAL :: tval2,tval1
+   REAL :: qr_val, qs_val, qg_val, rho_val
+   REAL :: thr1mx, thr2mx, thr1, thr2
+   REAL :: dbz,dbzr,dbzs,dbzg
+   REAL, PARAMETER :: tm10c=263.15
+
+   INTEGER :: ithr1mx,jthr1mx,ithr2mx,jthr2mx
+   INTEGER :: ithr1,jthr1,ithr2,jthr2
+
+! Derived composite radar reflectivity every 5 minutes
+
+   REAL, PARAMETER :: refddt=5.
 
 ! Constants used in ltg threat calculations
 
-   REAL, PARAMETER    :: coef1=0.042*1000.*1.22*20.0 ! 29 April change from 100.0 to 20.0 !GSR extra 100.0
+   REAL, PARAMETER    :: coef1=0.042*1000.*1.22
    REAL, PARAMETER    :: coef2=0.20*1.22
-! McCAUL/CASE (3/8/2012) -- Change clim1 to reduce false alarms in threat1.
-!   REAL, PARAMETER    :: clim1=0.01*1.22
    REAL, PARAMETER    :: clim1=1.50
    REAL, PARAMETER    :: clim2=0.40*1.22
    REAL, PARAMETER    :: clim3=0.02*1.22
    REAL, PARAMETER    :: capa=0.28589641e0
-   INTEGER :: ithr1mx,jthr1mx,ithr2mx,jthr2mx
-   INTEGER :: ithr1,jthr1,ithr2,jthr2
-   REAL :: tval2,tval1
-   REAL :: thr1mx, thr2mx, thr1, thr2
-   REAL, PARAMETER  :: t0=273.15
-   ! RAS: made these two variables local so we wouldn't pass them from solve
-   REAL, DIMENSION( ims:ime , jms:jme ) :: totice_colint,ltg1_calc
+
 
       DOUBLE PRECISION:: hail_max
       REAL:: hail_max_sp
-      DOUBLE PRECISION, PARAMETER:: thresh_conc = 0.0001d0                 ! number conc. of graupel/hail per cubic meter
+      DOUBLE PRECISION, PARAMETER:: thresh_conc = 0.005d0                 ! number conc. of graupel/hail per cubic meter
       LOGICAL:: scheme_has_graupel
       INTEGER, PARAMETER:: ngbins=50
       DOUBLE PRECISION, DIMENSION(ngbins+1):: xxDx
@@ -716,22 +730,34 @@ CONTAINS
        DO j=j_start(ij),j_end(ij)
        DO i=i_start(ij),i_end(ij)
          wspd10max(i,j)   = 0.
-         up_heli_min(i,j) = 0.
+         wspd10umax(i,j)  = 0.
+         wspd10vmax(i,j)  = 0.
+         wspd80max(i,j)   = 0.
+         wspd80umax(i,j)  = 0.
+         wspd80vmax(i,j)  = 0.
          up_heli_max(i,j) = 0.
+         up_heli_min(i,j) = 0.
          up_heli_max16(i,j) = 0.
+         up_heli_min16(i,j) = 0.
+         up_heli_max02(i,j) = 0.
+         up_heli_min02(i,j) = 0.
          up_heli_max03(i,j) = 0.
+         up_heli_min03(i,j) = 0.
          up_heli_max01(i,j) = 0.
-         rvort1_max(i,j)  = 0.
+         rel_vort_max(i,j)  = 0.
+         rel_vort_max01(i,j) = 0.
          w_up_max(i,j)    = 0.
          w_dn_max(i,j)    = 0.
+         w_mean_sum(i,j)  = 0.
          w_mean(i,j)      = 0.
          grpl_max(i,j)    = 0.
          refd_max(i,j)    = 0.
-         hail_maxk1(i,j)  = 0.
-         hail_max2d(i,j)  = 0.
+         refdm10c_max(i,j) = 0.
          ltg1_max(i,j)    = 0.
          ltg2_max(i,j)    = 0.
          ltg3_max(i,j)    = 0.
+         hail_maxk1(i,j)  = 0.
+         hail_max2d(i,j)  = 0.
          c_pblh(i,j)      = 0.
          SHEAR100(i,j)=0.
          DT100(i,j)=0.
@@ -759,6 +785,7 @@ CONTAINS
        numcolpts(i,j)   = 0.
        grpl_colint(i,j) = 0.
        totice_colint(i,j) = 0.
+       refdm10c_calc(i,j) = 0
        ltg1_calc(i,j) = 0
        w_1km_agl(i,j) = 0.
      ENDDO
@@ -773,13 +800,13 @@ CONTAINS
      DO k=kms,kme
      DO i=i_start(ij),i_end(ij)
 
-! Find vertical velocity max (up and down) below 400 mb
+! Find vertical velocity max (up and down) below 100 mb
 
-       IF ( p8w(i,k,j) .GT. 40000. .AND. w(i,k,j) .GT. w_up_max(i,j) ) THEN
+       IF ( p8w(i,k,j) .GT. 10000. .AND. w(i,k,j) .GT. w_up_max(i,j) ) THEN
          w_up_max(i,j) = w(i,k,j)
        ENDIF
 
-       IF ( p8w(i,k,j) .GT. 40000. .AND. w(i,k,j) .LT. w_dn_max(i,j) ) THEN
+       IF ( p8w(i,k,j) .GT. 10000. .AND. w(i,k,j) .LT. w_dn_max(i,j) ) THEN
          w_dn_max(i,j) = w(i,k,j)
        ENDIF
 
@@ -814,37 +841,33 @@ CONTAINS
      DO k=kms,kme-1
      DO i=i_start(ij),i_end(ij)
 
-! Calculate the column integrated graupel
+! Calculate the column integrated graupel, the column
+! integrated total ice, and the max lightning threat 1
 
        depth = ( ( ph(i,k+1,j) + phb(i,k+1,j) ) / g ) - &
                ( ( ph(i,k  ,j) + phb(i,k  ,j) ) / g )
        grpl_colint(i,j) = grpl_colint(i,j) + qg_curr(i,k,j) * depth * rho(i,k,j)
+
        totice_colint(i,j) = totice_colint(i,j) + ( qi_curr(i,k,j) + \
                             qs_curr(i,k,j) + qg_curr(i,k,j) ) * \
                             depth * rho(i,k,j)
 
-!       IF ( k .GT. 2 .AND. ltg1_calc(i,j) .EQ. 0 ) THEN
        IF ( ltg1_calc(i,j) .EQ. 0 ) THEN
          tval1 = (t(i,k,j)+t0)* \
                  ((p(i,k,j)+pb(i,k,j))*1.e-5)**capa
          tval2 = (t(i,k+1,j)+t0)* \
                  ((p(i,k+1,j)+pb(i,k+1,j))*1.e-5)**capa
 
-!         tval1 = (t(i,k,j)+300.)* \
-!                 ((p(i,k,j)+pb(i,k,j))*1.e-5)**capa
-!         tval2 = (t(i,k+1,j)+300.)* \
-!                 ((p(i,k+1,j)+pb(i,k+1,j))*1.e-5)**capa
-
          IF ( ((tval1+tval2)*0.5) .LT. 258.15 ) THEN
-           ltg1_calc(i,j) = 1
+             ltg1_calc(i,j) = 1
 
-           ltg1(i,j) = coef1*w(i,k,j)* \
-             ((qg_curr(i,k,j)+qg_curr(i,k+1,j))*0.5)/msft(i,j)
-           IF ( ltg1(i,j) .LT. clim1 ) ltg1(i,j) = 0.
+             ltg1(i,j) = coef1*w(i,k,j)* \
+               ((qg_curr(i,k,j)+qg_curr(i,k+1,j))*0.5)/msft(i,j)
+             IF ( ltg1(i,j) .LT. clim1 ) ltg1(i,j) = 0.
 
-           IF ( ltg1(i,j) .GT. ltg1_max(i,j) ) THEN
-             ltg1_max(i,j) = ltg1(i,j)
-           ENDIF
+             IF ( ltg1(i,j) .GT. ltg1_max(i,j) ) THEN
+               ltg1_max(i,j) = ltg1(i,j)
+             ENDIF
          ENDIF
        ENDIF
 
@@ -889,7 +912,6 @@ CONTAINS
    ENDDO
 !  !$OMP END PARALLEL DO
 
-
 !  !$OMP PARALLEL DO   &
 !  !$OMP PRIVATE ( ij )
    DO ij = 1 , num_tiles
@@ -898,21 +920,27 @@ CONTAINS
 
 ! Calculate the max 10 m wind speed between output times
 
-!tgs       wind_vel = sqrt ( u10(i,j)*u10(i,j) + v10(i,j)*v10(i,j) )
-       uh=0.5*(u_phy(i,1,j)+u_phy(i+1,1,j))
-       vh=0.5*(v_phy(i,1,j)+v_phy(i,1,j+1))
-       wind_vel = sqrt( uh*uh + vh*vh )
+!tgs       
+        wind_vel = sqrt ( u10(i,j)*u10(i,j) + v10(i,j)*v10(i,j) )
+!       uh=0.5*(u_phy(i,1,j)+u_phy(i+1,1,j))
+!       vh=0.5*(v_phy(i,1,j)+v_phy(i,1,j+1))
+!       wind_vel = sqrt( uh*uh + vh*vh )
 
        IF ( wind_vel .GT. wspd10max(i,j) ) THEN
          wspd10max(i,j) = wind_vel
+         wspd10umax(i,j) = u10(i,j)
+         wspd10vmax(i,j) = v10(i,j)
        ENDIF
 
 ! Calculate the column mean vertical velocity between output times
 
-       w_mean(i,j) = w_mean(i,j) + w_colmean(i,j) / numcolpts(i,j)
+       w_mean_sum(i,j) = w_mean_sum(i,j) + w_colmean(i,j) / numcolpts(i,j)
 
-       IF ( MOD(itimestep, idump) .eq. 0 ) THEN
-         w_mean(i,j) = w_mean(i,j) / idump
+!       IF ( MOD(itimestep, idump) .eq. 0 ) THEN
+!         w_mean(i,j) = w_mean(i,j) / idump
+!       ENDIF
+       IF ( ntimesteps .gt. 0 ) THEN 
+         w_mean(i,j) = w_mean_sum(i,j) / ntimesteps
        ENDIF
 
 ! Calculate the max column integrated graupel between output times
@@ -921,30 +949,124 @@ CONTAINS
           grpl_max(i,j) = grpl_colint(i,j)
        ENDIF
 
-   ! Calculate the max radar reflectivity between output times
-
-       IF ( refl_10cm(i,kms,j) .GT. refd_max(i,j) ) THEN
-         refd_max(i,j) = refl_10cm(i,kms,j)
-       ENDIF
-
 ! Calculate the max lightning threat 2
 
        ltg2(i,j) = coef2 * totice_colint(i,j) / msft(i,j)
-       IF ( ltg2(i,j) .LT. clim2 ) ltg2(i,j) = 0.
+       IF ( ltg2(i,j) .LT. clim2 ) ltg2(i,j) = 0. 
 
-       IF ( ltg2(i,j) .GT. ltg2_max(i,j) ) THEN
+       IF ( ltg2(i,j) .GT. ltg2_max(i,j) ) THEN 
           ltg2_max(i,j) = ltg2(i,j)
+       ENDIF
+
+   ! Calculate the max radar reflectivity between output times
+
+!       IF ( refl_10cm(i,kms,j) .GT. refd_max(i,j) ) THEN
+!         refd_max(i,j) = refl_10cm(i,kms,j)
+!       ENDIF
+
+! Use k=kms for now, but can be reset to whatever level seems best
+
+       dbzr = 0.
+       dbzs = 0.
+       dbzg = 0.
+
+       IF ( qr_curr(i,kms,j) .GT. 0. ) then
+         dbzr = (( qr_curr(i,kms,j) * rho(i,kms,j) ) ** 1.75 )*     &
+                3.630803e-9 * 1.e18
+       ENDIF
+
+       IF ( qs_curr(i,kms,j) .GT. 0. ) then
+         dbzs = (( qs_curr(i,kms,j) * rho(i,kms,j) ) ** 1.75 )*     &
+                2.18500e-10 * 1.e18
+       ENDIF
+
+       IF ( qg_curr(i,kms,j) .GT. 0. ) then
+         dbzg = (( qg_curr(i,kms,j) * rho(i,kms,j) ) ** 1.75 )*     &
+                1.033267e-9 * 1.e18
+       ENDIF
+
+       dbz = dbzr + dbzs + dbzg
+       IF ( dbz  .GT. 0. ) dbz  = 10.0 * LOG10 ( dbz  )
+       dbz  = MAX ( dbzmin, dbz  )
+
+       IF ( dbz .GT. refd_max(i,j) ) THEN
+         refd_max(i,j) = dbz
        ENDIF
 
      ENDDO
      ENDDO
    ENDDO
 !  !$OMP END PARALLEL DO
+! Calculate the derived radar reflectivity at the -10 deg C
+! level between output times -- used in CI algorithm
 
-! Calculate the max lightning threat 3 -- max values for
+!  !$OMP PARALLEL DO   &
+!  !$OMP PRIVATE ( ij )
+   DO ij = 1 , num_tiles
+     DO j=j_start(ij),j_end(ij)
+     DO k=kme-1,kms+1,-1
+     DO i=i_start(ij),i_end(ij)
+       tval1 = ( t(i,k,j) + t0 ) *  &
+               (( p(i,k,j) + pb(i,k,j) ) * 1.e-5 ) ** capa
+       tval2 = ( t(i,k-1,j) + t0 ) *  &
+               (( p(i,k-1,j) + pb(i,k-1,j) ) * 1.e-5 ) ** capa
+
+!       if ( j.eq.j_start(ij) .and. i.eq.i_start(ij) )then
+!         print *,' k, tval1, tval2 = ', k,tval1,tval2,refdm10c_calc(i,j)
+!       endif
+
+       IF ( tval1 .LE. tm10c .AND. tval2 .GE. tm10c .AND. refdm10c_calc(i,j) .EQ. 0 ) THEN
+         refdm10c_calc(i,j) = 1
+
+         afrac = ( tm10c - tval2 ) / ( tval1 - tval2 )
+
+         qr_val = qr_curr(i,k-1,j) + afrac * ( qr_curr(i,k,j) - qr_curr(i,k-1,j) )
+         qs_val = qs_curr(i,k-1,j) + afrac * ( qs_curr(i,k,j) - qs_curr(i,k-1,j) )
+         qg_val = qg_curr(i,k-1,j) + afrac * ( qg_curr(i,k,j) - qg_curr(i,k-1,j) )
+
+         rho_val = rho(i,k-1,j) + afrac * ( rho(i,k,j) - rho(i,k-1,j) )
+
+! Derived radar reflectivity between output times
+
+! Use k=kms for now, but can be reset to whatever level seems best
+
+         dbzr = 0.
+         dbzs = 0.
+         dbzg = 0.
+
+         IF ( qr_val .GT. 0. ) then
+           dbzr = (( qr_val * rho_val ) ** 1.75 )*     &
+                  3.630803e-9 * 1.e18
+         ENDIF
+
+         IF ( qs_val .GT. 0. ) then
+           dbzs = (( qs_val * rho_val ) ** 1.75 )*     &
+                  2.18500e-10 * 1.e18
+         ENDIF
+
+         IF ( qg_val .GT. 0. ) then
+           dbzg = (( qg_val * rho_val ) ** 1.75 )*     &
+                  1.033267e-9 * 1.e18
+         ENDIF
+
+         dbz = dbzr + dbzs + dbzg
+         IF ( dbz  .GT. 0. ) dbz  = 10.0 * LOG10 ( dbz  )
+         dBz = MAX ( dbzmin, dbz  )
+
+         IF ( dbz .GT. refdm10c_max(i,j) ) THEN 
+           refdm10c_max(i,j) = dbz
+         ENDIF
+ 
+       ENDIF
+     ENDDO
+     ENDDO
+     ENDDO
+   ENDDO
+!  !$OMP END PARALLEL DO
+! Calculate the max lightning threat 3 -- max values for 
 ! lightning threats 1 and 2 must be determined first
 
-! Make the calculation for the instantaneous lightning
+! Make the calculation for the instantaneous lightning 
 ! threat fields as well
 
 !  !$OMP PARALLEL DO   &
@@ -983,6 +1105,7 @@ CONTAINS
      ENDDO
    ENDDO
 !  !$OMP END PARALLEL DO
+
 ! Compute global MAX
 
    CALL wrf_dm_maxval ( thr1mx, ithr1mx, jthr1mx )
@@ -991,43 +1114,26 @@ CONTAINS
    CALL wrf_dm_maxval ( thr2,   ithr2,   jthr2   )
 
 ! Now calculate the max and instantaneous lightning threat 3
-! 06 april 2015:GSR change from 95% --> 90% and 5% --> 10%
 
 !  !$OMP PARALLEL DO   &
 !  !$OMP PRIVATE ( ij )
    DO ij = 1 , num_tiles
      DO j=j_start(ij),j_end(ij)
      DO i=i_start(ij),i_end(ij)
-!       IF ( thr1mx .GT. 0. ) THEN
-!         ltg3_max(i,j) = 0.95 * ltg1_max(i,j) * ( thr2mx / thr1mx ) + &
-!                         0.05 * ltg2_max(i,j)
-!       ELSE
-!         ltg3_max(i,j) = 0.05 * ltg2_max(i,j)
-!       ENDIF
-
        IF ( thr2mx .GT. 0. ) THEN
-         ltg3_max(i,j) = 0.90 * ltg1_max(i,j) + &
-                         0.10 * ltg2_max(i,j) * ( thr1mx / thr2mx )
+         ltg3_max(i,j) = 0.95 * ltg1_max(i,j) + &
+                         0.05 * ( thr1mx / thr2mx ) * ltg2_max(i,j)
        ELSE
-         ltg3_max(i,j) = 0.90 * ltg1_max(i,j)
+         ltg3_max(i,j) = 0.95 * ltg1_max(i,j)
        ENDIF
-
        IF ( ltg3_max(i,j) .LT. clim3 ) ltg3_max(i,j) = 0.
 
-!       IF ( thr1 .GT. 0. ) THEN
-!         ltg3(i,j) = 0.95 * ltg1(i,j) * ( thr2 / thr1 ) + &
-!                     0.05 * ltg2(i,j)
-!       ELSE
-!         ltg3(i,j) = 0.05 * ltg2(i,j)
-!       ENDIF
-
        IF ( thr2 .GT. 0. ) THEN
-         ltg3(i,j) = 0.90 * ltg1(i,j) + &
-                     0.10 * ltg2(i,j) * ( thr1 / thr2 )
+         ltg3(i,j) = 0.95 * ltg1(i,j) + &
+                     0.05 * ( thr1 / thr2 ) * ltg2(i,j)
        ELSE
-         ltg3(i,j) = 0.90 * ltg1(i,j)
+         ltg3(i,j) = 0.95 * ltg1(i,j)
        ENDIF
-
        IF ( ltg3(i,j) .LT. clim3 ) ltg3(i,j) = 0.
      ENDDO
      ENDDO
@@ -1133,6 +1239,11 @@ CONTAINS
                                 wt1*SQRT(u_phy(i,k-1,j)**2 + v_phy(i,k-1,j)**2)
                 !print*,"z-ter=",zm-ter," wt1=",wt1
                 !print*,i,j," WSPD80=",WSPD80(i,j)
+             ENDIF
+             
+             ! Save 80 m WIND MAX
+             IF ( WSPD80(i,j) .GT. wspd80max(i,j) ) THEN
+               wspd80max(i,j) = WSPD80(i,j)
              ENDIF
           ENDIF
 

@@ -300,31 +300,44 @@ CONTAINS
                 ,T=grid%t_2,U_PHY=grid%u_phy,V_PHY=grid%v_phy        & !joe-wfip
                 ,P=grid%p,PB=grid%pb                                 & !joe-wfip
                 ,WSPD10MAX=grid%wspd10max                            &
+                ,WSPD10UMAX=grid%wspd10umax                          &
+                ,WSPD10VMAX=grid%wspd10vmax                          &
+                ,WSPD80MAX=grid%wspd80max                            &
+                ,WSPD80UMAX=grid%wspd80umax                          &
+                ,WSPD80VMAX=grid%wspd80vmax                          &
                 ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               & !joe-wfip 
                 ,LWP=grid%lwp,IWP=grid%iwp                           & !joe-wfip
                 ,MAXCLDFRA=grid%maxcldfra                            & !joe-wfip
                 ,SHEAR100=grid%shear100,DT100=grid%DT100             & !joe-wfip
-                ,UP_HELI_MIN=grid%up_heli_min                        &
                 ,UP_HELI_MAX=grid%up_heli_max                        &
+                ,UP_HELI_MIN=grid%up_heli_min                        &
                 ,UP_HELI_MAX16=grid%up_heli_max16                    &
-                ,UP_HELI_MAX03=grid%up_heli_max03                    &
+                ,UP_HELI_MIN16=grid%up_heli_min16                    &
+                ,UP_HELI_MAX02=grid%up_heli_max02                    &    
+                ,UP_HELI_MIN02=grid%up_heli_min02                    &
+                ,UP_HELI_MAX03=grid%up_heli_max03                    &    
+                ,UP_HELI_MIN03=grid%up_heli_min03                    &
                 ,UP_HELI_MAX01=grid%up_heli_max01                    &
-                ,RVORT1_MAX=grid%rvort1_max                          &
+                ,REL_VORT_MAX=grid%rel_vort_max                      &
+                ,REL_VORT_MAX01=grid%rel_vort_max01                  &
                 ,C_PBLH=grid%c_pblh                                  &
-                ,W_1KM_AGL=grid%w_1km_agl                            &
-                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
-                ,LTG3_MAX=grid%ltg3_max                              &
-                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
-                ,MSFT=grid%msft                                      &
-                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
-                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
                 ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
+                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
+                ,W_1KM_AGL=grid%w_1km_agl                            &
                 ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
                 ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &
-                ,NUMCOLPTS=grid%numcolpts,W_MEAN=grid%w_mean         &
+                ,NUMCOLPTS=grid%numcolpts,W_MEAN_SUM=grid%w_mean_sum &
+                ,W_MEAN=grid%w_mean                                  &
                 ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
                 ,REFD_MAX=grid%refd_max                              &
                 ,refl_10cm=grid%refl_10cm                            &
+                ,REFDM10C_MAX=grid%refdm10c_max                      &
+                ,REFDM10C_CALC=grid%refdm10c_calc                    &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,LTG1_CALC=grid%ltg1_calc                            &
+                ,TOTICE_COLINT=grid%totice_colint,MSFT=grid%msft     &
                 ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd
                 ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd
                 ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
@@ -333,6 +346,7 @@ CONTAINS
                 ,QC_CURR=moist(ims,kms,jms,P_QC)                     & !joe-wfip
                 ,QI_CURR=moist(ims,kms,jms,P_QI)                     & !joe-wfip
                 ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
                 ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
                 ,CLDFRA=grid%cldfra                                  & !joe-wfip
                 ,icloud_bl=config_flags%icloud_bl                  & !joe-wfip
@@ -438,32 +452,45 @@ CONTAINS
                 ,U10=grid%u10,V10=grid%v10,W=grid%w_2                &
                 ,T=grid%t_2,U_PHY=grid%u_phy,V_PHY=grid%v_phy        & !joe-wfip
                 ,P=grid%p,PB=grid%pb                                 & !joe-wfip
-                ,WSPD10MAX=grid%wspd10max                            &
+                ,WSPD10MAX=grid%wspd10max                            &    
+                ,WSPD10UMAX=grid%wspd10umax                          &    
+                ,WSPD10VMAX=grid%wspd10vmax                          &    
+                ,WSPD80MAX=grid%wspd80max                            &    
+                ,WSPD80UMAX=grid%wspd80umax                          &    
+                ,WSPD80VMAX=grid%wspd80vmax                          &    
                 ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               & !joe-wfip 
                 ,LWP=grid%lwp,IWP=grid%iwp                           & !joe-wfip
                 ,MAXCLDFRA=grid%maxcldfra                            & !joe-wfip
                 ,SHEAR100=grid%shear100,DT100=grid%DT100             & !joe-wfip
-                ,UP_HELI_MIN=grid%up_heli_min                        &
-                ,UP_HELI_MAX=grid%up_heli_max                        &
-                ,UP_HELI_MAX16=grid%up_heli_max16                    &
-                ,UP_HELI_MAX03=grid%up_heli_max03                    &
+                ,UP_HELI_MAX=grid%up_heli_max                        &    
+                ,UP_HELI_MIN=grid%up_heli_min                        &    
+                ,UP_HELI_MAX16=grid%up_heli_max16                    &    
+                ,UP_HELI_MIN16=grid%up_heli_min16                    &    
+                ,UP_HELI_MAX02=grid%up_heli_max02                    &    
+                ,UP_HELI_MIN02=grid%up_heli_min02                    &    
+                ,UP_HELI_MAX03=grid%up_heli_max03                    &    
+                ,UP_HELI_MIN03=grid%up_heli_min03                    &    
                 ,UP_HELI_MAX01=grid%up_heli_max01                    &
-                ,RVORT1_MAX=grid%rvort1_max                          &
+                ,REL_VORT_MAX=grid%rel_vort_max                      &    
+                ,REL_VORT_MAX01=grid%rel_vort_max01                  &    
                 ,C_PBLH=grid%c_pblh                                  &
-                ,W_1KM_AGL=grid%w_1km_agl                            &
-                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
                 ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
-                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
-                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &
-                ,NUMCOLPTS=grid%numcolpts,W_MEAN=grid%w_mean         &
+                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
+                ,W_1KM_AGL=grid%w_1km_agl                            &
+                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &    
+                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &    
+                ,NUMCOLPTS=grid%numcolpts,W_MEAN_SUM=grid%w_mean_sum &
+                ,W_MEAN=grid%w_mean                                  &    
                 ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
-                ,REFD_MAX=grid%refd_max                              &
-                ,refl_10cm=grid%refl_10cm                            &
-                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
-                ,LTG3_MAX=grid%ltg3_max                              &
-                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
-                ,MSFT=grid%msft                                      &
-                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
+                ,REFD_MAX=grid%refd_max                              &    
+                ,refl_10cm=grid%refl_10cm                            &    
+                ,REFDM10C_MAX=grid%refdm10c_max                      &    
+                ,REFDM10C_CALC=grid%refdm10c_calc                    &    
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &    
+                ,LTG3_MAX=grid%ltg3_max                              &    
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &    
+                ,LTG1_CALC=grid%ltg1_calc                            &    
+                ,TOTICE_COLINT=grid%totice_colint,MSFT=grid%msft     &    
                 ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
                 ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
                 ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
@@ -472,6 +499,7 @@ CONTAINS
                 ,QC_CURR=moist(ims,kms,jms,P_QC)                     & !joe-wfip
                 ,QI_CURR=moist(ims,kms,jms,P_QI)                     & !joe-wfip
                 ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
                 ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
                 ,CLDFRA=grid%cldfra                                  & !joe-wfip
                 ,icloud_bl=config_flags%icloud_bl                  & !joe-wfip
@@ -552,46 +580,59 @@ CONTAINS
                 ,ITIMESTEP=grid%itimestep                            &
                 ,NTIMESTEPS=grid%ntimesteps                          &
                 ,U10=grid%u10,V10=grid%v10,W=grid%w_2                &
-                ,WSPD10MAX=grid%wspd10max                            &
-                ,UP_HELI_MIN=grid%up_heli_min                        &
-                ,UP_HELI_MAX=grid%up_heli_max                        &
-                ,UP_HELI_MAX16=grid%up_heli_max16                    &
-                ,UP_HELI_MAX03=grid%up_heli_max03                    &
+                ,T=grid%t_2,U_PHY=grid%u_phy,V_PHY=grid%v_phy        & !joe-wfip
+                ,P=grid%p,PB=grid%pb                                 & !joe-wfip                
+                ,WSPD10MAX=grid%wspd10max                            &    
+                ,WSPD10UMAX=grid%wspd10umax                          &    
+                ,WSPD10VMAX=grid%wspd10vmax                          &    
+                ,WSPD80MAX=grid%wspd80max                            &    
+                ,WSPD80UMAX=grid%wspd80umax                          &    
+                ,WSPD80VMAX=grid%wspd80vmax                          &    
+                ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               & !joe-wfip 
+                ,LWP=grid%lwp,IWP=grid%iwp                           & !joe-wfip
+                ,MAXCLDFRA=grid%maxcldfra                            & !joe-wfip
+                ,SHEAR100=grid%shear100,DT100=grid%DT100             & !joe-wfip
+                ,UP_HELI_MAX=grid%up_heli_max                        &    
+                ,UP_HELI_MIN=grid%up_heli_min                        &    
+                ,UP_HELI_MAX16=grid%up_heli_max16                    &    
+                ,UP_HELI_MIN16=grid%up_heli_min16                    &    
+                ,UP_HELI_MAX02=grid%up_heli_max02                    &    
+                ,UP_HELI_MIN02=grid%up_heli_min02                    &    
+                ,UP_HELI_MAX03=grid%up_heli_max03                    &    
+                ,UP_HELI_MIN03=grid%up_heli_min03                    &    
                 ,UP_HELI_MAX01=grid%up_heli_max01                    &
-                ,RVORT1_MAX=grid%rvort1_max                          &
+                ,REL_VORT_MAX=grid%rel_vort_max                      &    
+                ,REL_VORT_MAX01=grid%rel_vort_max01                  &    
                 ,C_PBLH=grid%c_pblh                                  &
-                ,W_1KM_AGL=grid%w_1km_agl                            &
-                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
                 ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
-                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
-                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &
-                ,NUMCOLPTS=grid%numcolpts,W_MEAN=grid%w_mean         &
+                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
+                ,W_1KM_AGL=grid%w_1km_agl                            &
+                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &    
+                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &    
+                ,NUMCOLPTS=grid%numcolpts,W_MEAN_SUM=grid%w_mean_sum &
+                ,W_MEAN=grid%w_mean                                  &    
                 ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
-                ,REFD_MAX=grid%refd_max                              &
-                ,refl_10cm=grid%refl_10cm                            &
-                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
-                ,LTG3_MAX=grid%ltg3_max                              &
-                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
-                ,MSFT=grid%msft                                      &
-                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
+                ,REFD_MAX=grid%refd_max                              &    
+                ,refl_10cm=grid%refl_10cm                            &    
+                ,REFDM10C_MAX=grid%refdm10c_max                      &    
+                ,REFDM10C_CALC=grid%refdm10c_calc                    &    
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &    
+                ,LTG3_MAX=grid%ltg3_max                              &    
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &    
+                ,LTG1_CALC=grid%ltg1_calc                            &    
+                ,TOTICE_COLINT=grid%totice_colint,MSFT=grid%msft     &    
                 ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
                 ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
                 ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
                 ,HT=grid%ht                                          & ! dcd
                 ,HAIL_MAXK1=grid%hail_maxk1,HAIL_MAX2D=grid%hail_max2d &  !  gthompsn
-                ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
-                ,NG_CURR=scalar(ims,kms,jms,P_QNG)                   &  !  gthompsn
-                ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
-                ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               & !joe-wfip 
-                ,T=grid%t_2,U_PHY=grid%u_phy,V_PHY=grid%v_phy        & !joe-wfip
-                ,P=grid%p,PB=grid%pb                                 & !joe-wfip
-                ,LWP=grid%lwp,IWP=grid%iwp                           & !joe-wfip
-                ,MAXCLDFRA=grid%maxcldfra                            & !joe-wfip
-                ,SHEAR100=grid%shear100,DT100=grid%DT100             & !joe-wfip
                 ,QC_CURR=moist(ims,kms,jms,P_QC)                     & !joe-wfip
                 ,QI_CURR=moist(ims,kms,jms,P_QI)                     & !joe-wfip
+                ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
+                ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
                 ,CLDFRA=grid%cldfra                                  & !joe-wfip
-                ,icloud_bl=config_flags%icloud_bl                  & !joe-wfip
+                ,icloud_bl=config_flags%icloud_bl                    & !joe-wfip
                 ,CLDFRA_BL=grid%cldfra_bl,QC_BL=grid%qc_bl           & !joe-wfip
       ! Dimension arguments
                 ,IDS=ids,IDE=ide, JDS=jds,JDE=jde, KDS=kds,KDE=kde   &
@@ -667,44 +708,57 @@ CONTAINS
                 ,ITIMESTEP=grid%itimestep                            &
                 ,NTIMESTEPS=grid%ntimesteps                          &
                 ,U10=grid%u10,V10=grid%v10,W=grid%w_2                &
-                ,WSPD10MAX=grid%wspd10max                            &
-                ,UP_HELI_MIN=grid%up_heli_min                        &
-                ,UP_HELI_MAX=grid%up_heli_max                        &
-                ,UP_HELI_MAX16=grid%up_heli_max16                    &
-                ,UP_HELI_MAX03=grid%up_heli_max03                    &
-                ,UP_HELI_MAX01=grid%up_heli_max01                    &
-                ,RVORT1_MAX=grid%rvort1_max                          &
-                ,C_PBLH=grid%c_pblh                                  &
-                ,W_1KM_AGL=grid%w_1km_agl                            &
-                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
-                ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
-                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
-                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &
-                ,NUMCOLPTS=grid%numcolpts,W_MEAN=grid%w_mean         &
-                ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
-                ,REFD_MAX=grid%refd_max                              &
-                ,refl_10cm=grid%refl_10cm                            &
-                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
-                ,LTG3_MAX=grid%ltg3_max                              &
-                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
-                ,MSFT=grid%msft                                      &  
-                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
-                ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
-                ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
-                ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
-                ,HT=grid%ht                                          & ! dcd
-                ,HAIL_MAXK1=grid%hail_maxk1,HAIL_MAX2D=grid%hail_max2d &  !  gthompsn
-                ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
-                ,QH_CURR=moist(ims,kms,jms,P_QH)                     &  !  gthompsn
-                ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
-                ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               & !joe-wfip 
                 ,T=grid%t_2,U_PHY=grid%u_phy,V_PHY=grid%v_phy        & !joe-wfip
                 ,P=grid%p,PB=grid%pb                                 & !joe-wfip
+                ,WSPD10MAX=grid%wspd10max                            &
+                ,WSPD10UMAX=grid%wspd10umax                          &
+                ,WSPD10VMAX=grid%wspd10vmax                          &
+                ,WSPD80MAX=grid%wspd80max                            &
+                ,WSPD80UMAX=grid%wspd80umax                          &
+                ,WSPD80VMAX=grid%wspd80vmax                          &
+                ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               & !joe-wfip 
                 ,LWP=grid%lwp,IWP=grid%iwp                           & !joe-wfip
                 ,MAXCLDFRA=grid%maxcldfra                            & !joe-wfip
                 ,SHEAR100=grid%shear100,DT100=grid%DT100             & !joe-wfip
+                ,UP_HELI_MAX=grid%up_heli_max                        &
+                ,UP_HELI_MIN=grid%up_heli_min                        &
+                ,UP_HELI_MAX16=grid%up_heli_max16                    &
+                ,UP_HELI_MIN16=grid%up_heli_min16                    &
+                ,UP_HELI_MAX02=grid%up_heli_max02                    &
+                ,UP_HELI_MIN02=grid%up_heli_min02                    &
+                ,UP_HELI_MAX03=grid%up_heli_max03                    &
+                ,UP_HELI_MIN03=grid%up_heli_min03                    &
+                ,UP_HELI_MAX01=grid%up_heli_max01                    &
+                ,REL_VORT_MAX=grid%rel_vort_max                      &
+                ,REL_VORT_MAX01=grid%rel_vort_max01                  &
+                ,C_PBLH=grid%c_pblh                                  &
+                ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
+                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
+                ,W_1KM_AGL=grid%w_1km_agl                            &
+                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
+                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &
+                ,NUMCOLPTS=grid%numcolpts,W_MEAN_SUM=grid%w_mean_sum &
+                ,W_MEAN=grid%w_mean                                  &
+                ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
+                ,REFD_MAX=grid%refd_max                              &
+                ,refl_10cm=grid%refl_10cm                            &
+                ,REFDM10C_MAX=grid%refdm10c_max                      &
+                ,REFDM10C_CALC=grid%refdm10c_calc                    &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,LTG1_CALC=grid%ltg1_calc                            &
+                ,TOTICE_COLINT=grid%totice_colint,MSFT=grid%msft     &
+                ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd
+                ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd
+                ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
+                ,HT=grid%ht                                          & ! dcd
+                ,HAIL_MAXK1=grid%hail_maxk1,HAIL_MAX2D=grid%hail_max2d &  !  gthompsn
                 ,QC_CURR=moist(ims,kms,jms,P_QC)                     & !joe-wfip
                 ,QI_CURR=moist(ims,kms,jms,P_QI)                     & !joe-wfip
+                ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
+                ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
                 ,CLDFRA=grid%cldfra                                  & !joe-wfip
                 ,icloud_bl=config_flags%icloud_bl                  & !joe-wfip
                 ,CLDFRA_BL=grid%cldfra_bl,QC_BL=grid%qc_bl           & !joe-wfip
@@ -782,46 +836,57 @@ CONTAINS
                 ,ITIMESTEP=grid%itimestep                            &
                 ,NTIMESTEPS=grid%ntimesteps                          &
                 ,U10=grid%u10,V10=grid%v10,W=grid%w_2                &
-                ,WSPD10MAX=grid%wspd10max                            &
-                ,UP_HELI_MIN=grid%up_heli_min                        &
-                ,UP_HELI_MAX=grid%up_heli_max                        &
-                ,UP_HELI_MAX16=grid%up_heli_max16                    &
-                ,UP_HELI_MAX03=grid%up_heli_max03                    &
-                ,UP_HELI_MAX01=grid%up_heli_max01                    &
-                ,RVORT1_MAX=grid%rvort1_max                          &
-                ,C_PBLH=grid%c_pblh                                  &
-                ,W_1KM_AGL=grid%w_1km_agl                            &
-                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
-                ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
-                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
-                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &
-                ,NUMCOLPTS=grid%numcolpts,W_MEAN=grid%w_mean         &
-                ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
-                ,REFD_MAX=grid%refd_max                              &
-                ,refl_10cm=grid%refl_10cm                            &
-                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
-                ,LTG3_MAX=grid%ltg3_max                              &
-                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
-                ,MSFT=grid%msft                                      &
-                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
-                ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
-                ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
-                ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
-                ,HT=grid%ht                                          & ! dcd
-                ,HAIL_MAXK1=grid%hail_maxk1,HAIL_MAX2D=grid%hail_max2d &  !  gthompsn
-                ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
-                ,NG_CURR=scalar(ims,kms,jms,P_QNG)                   &  !  gthompsn
-                ,QH_CURR=moist(ims,kms,jms,P_QH)                     &  !  gthompsn
-                ,NH_CURR=scalar(ims,kms,jms,P_QNH)                   &  !  gthompsn
-                ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
-                ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               & !joe-wfip
                 ,T=grid%t_2,U_PHY=grid%u_phy,V_PHY=grid%v_phy        & !joe-wfip
                 ,P=grid%p,PB=grid%pb                                 & !joe-wfip
+                ,WSPD10MAX=grid%wspd10max                            &
+                ,WSPD10UMAX=grid%wspd10umax                          &
+                ,WSPD10VMAX=grid%wspd10vmax                          &
+                ,WSPD80MAX=grid%wspd80max                            &
+                ,WSPD80UMAX=grid%wspd80umax                          &
+                ,WSPD80VMAX=grid%wspd80vmax                          &
+                ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               & !joe-wfip 
                 ,LWP=grid%lwp,IWP=grid%iwp                           & !joe-wfip
                 ,MAXCLDFRA=grid%maxcldfra                            & !joe-wfip
                 ,SHEAR100=grid%shear100,DT100=grid%DT100             & !joe-wfip
+                ,UP_HELI_MAX=grid%up_heli_max                        &
+                ,UP_HELI_MIN=grid%up_heli_min                        &
+                ,UP_HELI_MAX16=grid%up_heli_max16                    &
+                ,UP_HELI_MIN16=grid%up_heli_min16                    &
+                ,UP_HELI_MAX02=grid%up_heli_max02                    &
+                ,UP_HELI_MIN02=grid%up_heli_min02                    &
+                ,UP_HELI_MAX03=grid%up_heli_max03                    &
+                ,UP_HELI_MIN03=grid%up_heli_min03                    &
+                ,UP_HELI_MAX01=grid%up_heli_max01                    &
+                ,REL_VORT_MAX=grid%rel_vort_max                      &
+                ,REL_VORT_MAX01=grid%rel_vort_max01                  &
+                ,C_PBLH=grid%c_pblh                                  &
+                ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
+                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
+                ,W_1KM_AGL=grid%w_1km_agl                            &
+                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
+                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &
+                ,NUMCOLPTS=grid%numcolpts,W_MEAN_SUM=grid%w_mean_sum &
+                ,W_MEAN=grid%w_mean                                  &
+                ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
+                ,REFD_MAX=grid%refd_max                              &
+                ,refl_10cm=grid%refl_10cm                            &
+                ,REFDM10C_MAX=grid%refdm10c_max                      &
+                ,REFDM10C_CALC=grid%refdm10c_calc                    &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,LTG1_CALC=grid%ltg1_calc                            &
+                ,TOTICE_COLINT=grid%totice_colint,MSFT=grid%msft     &
+                ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd
+                ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd
+                ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
+                ,HT=grid%ht                                          & ! dcd
+                ,HAIL_MAXK1=grid%hail_maxk1,HAIL_MAX2D=grid%hail_max2d &  !  gthompsn
                 ,QC_CURR=moist(ims,kms,jms,P_QC)                     & !joe-wfip
                 ,QI_CURR=moist(ims,kms,jms,P_QI)                     & !joe-wfip
+                ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
+                ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
                 ,CLDFRA=grid%cldfra                                  & !joe-wfip
                 ,icloud_bl=config_flags%icloud_bl                  & !joe-wfip
                 ,CLDFRA_BL=grid%cldfra_bl,QC_BL=grid%qc_bl           & !joe-wfip
@@ -915,10 +980,10 @@ CONTAINS
                 ,SNOWNCV=grid%snowncv, SNOW_ACC_NC=grid%snow_acc_nc  &    
                 ,GRAUP_ACC_NC=grid%graup_acc_nc                      &
                 ,GRAUPELNCV=grid%graupelncv                          &
-                ,ACSNOW=grid%acsnow                                  &
-                ,ACGRAUP=grid%acgraup                                &
                 ,PREC_ACC_C=grid%prec_acc_c                          &
                 ,PREC_ACC_NC=grid%prec_acc_nc                        &
+                ,ACSNOW=grid%acsnow                                  &
+                ,ACGRAUP=grid%acgraup                                &
                 ,PREC_ACC_DT=config_flags%prec_acc_dt                &
                 ,CURR_SECS2=curr_secs2                               &
                 ,NWP_DIAGNOSTICS=config_flags%nwp_diagnostics        &
@@ -928,46 +993,62 @@ CONTAINS
                 ,ITIMESTEP=grid%itimestep                            &
                 ,NTIMESTEPS=grid%ntimesteps                          &
                 ,U10=grid%u10,V10=grid%v10,W=grid%w_2                &
-                ,WSPD10MAX=grid%wspd10max                            &
-                ,UP_HELI_MIN=grid%up_heli_min                        &
-                ,UP_HELI_MAX=grid%up_heli_max                        &
-                ,UP_HELI_MAX16=grid%up_heli_max16                    &
-                ,UP_HELI_MAX03=grid%up_heli_max03                    &
-                ,UP_HELI_MAX01=grid%up_heli_max01                    &
-                ,RVORT1_MAX=grid%rvort1_max                          &
-                ,C_PBLH=grid%c_pblh                                  &
-                ,W_1KM_AGL=grid%w_1km_agl                            &
-                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
-                ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
-                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
-                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &
-                ,NUMCOLPTS=grid%numcolpts,W_MEAN=grid%w_mean         &
-                ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
-                ,REFD_MAX=grid%refd_max                              &
-                ,refl_10cm=grid%refl_10cm                            &
-                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
-                ,LTG3_MAX=grid%ltg3_max                              &
-                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
-                ,MSFT=grid%msft                                      &
-                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
-                ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd  
-                ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd  
-                ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
-                ,HT=grid%ht                                          & ! dcd
-                ,HAIL_MAXK1=grid%hail_maxk1,HAIL_MAX2D=grid%hail_max2d &  !  gthompsn
-                ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
-                ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
-                ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               &
                 ,T=grid%t_2,U_PHY=grid%u_phy,V_PHY=grid%v_phy        & !joe-wfip
                 ,P=grid%p,PB=grid%pb                                 & !joe-wfip
+                ,WSPD10MAX=grid%wspd10max                            &
+                ,WSPD10UMAX=grid%wspd10umax                          &
+                ,WSPD10VMAX=grid%wspd10vmax                          &
+                ,WSPD80MAX=grid%wspd80max                            &
+                ,WSPD80UMAX=grid%wspd80umax                          &
+                ,WSPD80VMAX=grid%wspd80vmax                          &
+                ,WSPD10=grid%wspd10,WSPD80=grid%wspd80               & !joe-wfip 
                 ,LWP=grid%lwp,IWP=grid%iwp                           & !joe-wfip
                 ,MAXCLDFRA=grid%maxcldfra                            & !joe-wfip
                 ,SHEAR100=grid%shear100,DT100=grid%DT100             & !joe-wfip
+                ,UP_HELI_MAX=grid%up_heli_max                        &
+                ,UP_HELI_MIN=grid%up_heli_min                        &
+                ,UP_HELI_MAX16=grid%up_heli_max16                    &
+                ,UP_HELI_MIN16=grid%up_heli_min16                    &
+                ,UP_HELI_MAX02=grid%up_heli_max02                    &
+                ,UP_HELI_MIN02=grid%up_heli_min02                    &
+                ,UP_HELI_MAX03=grid%up_heli_max03                    &
+                ,UP_HELI_MIN03=grid%up_heli_min03                    &
+                ,UP_HELI_MAX01=grid%up_heli_max01                    &
+                ,REL_VORT_MAX=grid%rel_vort_max                      &
+                ,REL_VORT_MAX01=grid%rel_vort_max01                  &
+                ,C_PBLH=grid%c_pblh                                  &
+                ,TH2=grid%th2,Q2=grid%q2,PSFC=grid%psfc              &
+                ,QV_CURR=moist(ims,kms,jms,P_QV)                     &
+                ,W_1KM_AGL=grid%w_1km_agl                            &
+                ,W_UP_MAX=grid%w_up_max,W_DN_MAX=grid%w_dn_max       &
+                ,ZNW=grid%znw,W_COLMEAN=grid%w_colmean               &
+                ,NUMCOLPTS=grid%numcolpts,W_MEAN_SUM=grid%w_mean_sum &
+                ,W_MEAN=grid%w_mean                                  &
+                ,GRPL_MAX=grid%grpl_max,GRPL_COLINT=grid%grpl_colint &
+                ,REFD_MAX=grid%refd_max                              &
+                ,refl_10cm=grid%refl_10cm                            &
+                ,REFDM10C_MAX=grid%refdm10c_max                      &
+                ,REFDM10C_CALC=grid%refdm10c_calc                    &
+                ,LTG1_MAX=grid%ltg1_max,LTG2_MAX=grid%ltg2_max       &
+                ,LTG3_MAX=grid%ltg3_max                              &
+                ,LTG1=grid%ltg1,LTG2=grid%ltg2,LTG3=grid%ltg3        &
+                ,LTG1_CALC=grid%ltg1_calc                            &
+                ,TOTICE_COLINT=grid%totice_colint,MSFT=grid%msft     &
+                ,REFL_10CM_1KM=grid%refl_10cm_1km                    & ! dcd
+                ,REFL_10CM_4KM=grid%refl_10cm_4km                    & ! dcd
+                ,COMPOSITE_REFL_10CM=grid%composite_refl_10cm        & ! dcd
+                ,HT=grid%ht                                          & ! dcd
+                ,HAIL_MAXK1=grid%hail_maxk1,HAIL_MAX2D=grid%hail_max2d &  !  gthompsn
                 ,QC_CURR=moist(ims,kms,jms,P_QC)                     & !joe-wfip
                 ,QI_CURR=moist(ims,kms,jms,P_QI)                     & !joe-wfip
+                ,QG_CURR=moist(ims,kms,jms,P_QG)                     &
+                ,QS_CURR=moist(ims,kms,jms,P_QS)                     &
+                ,RHO=grid%rho,PH=grid%ph_2,PHB=grid%phb,G=g          &
                 ,CLDFRA=grid%cldfra                                  & !joe-wfip
                 ,icloud_bl=config_flags%icloud_bl                  & !joe-wfip
                 ,CLDFRA_BL=grid%cldfra_bl,QC_BL=grid%qc_bl           & !joe-wfip
+                ,QR_CURR=moist(ims,kms,jms,P_QR)                     &  !  gthompsn
+                ,NR_CURR=scalar(ims,kms,jms,P_QNR)                   &  !  gthompsn
       ! Dimension arguments
                 ,IDS=ids,IDE=ide, JDS=jds,JDE=jde, KDS=kds,KDE=kde   &
                 ,IMS=ims,IME=ime, JMS=jms,JME=jme, KMS=kms,KME=kme   &

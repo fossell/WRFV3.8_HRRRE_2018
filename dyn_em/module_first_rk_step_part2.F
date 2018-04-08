@@ -461,18 +461,25 @@ BENCH_START(helicity_tim)
        DO ij = 1 , grid%num_tiles
 
           CALL wrf_debug ( 200 , ' call cal_helicity' )
-          CALL cal_helicity ( config_flags,grid%u_2,grid%v_2,grid%w_2,  &
+          CALL cal_helicity ( config_flags,grid%itimestep,grid%dt,grid%u_2,grid%v_2,grid%w_2,  &
                               grid%uh,                             &
+                              grid%uh16,                           &
+                              grid%uh02,                           &
                               grid%uh03,                           &
                               grid%uh01,                           &
-                              grid%rvort1,                         &
                               grid%up_heli_max,                    &
-                              grid%up_heli_min,                    &
-                              grid%up_heli_max03,                  &
-                              grid%up_heli_max01,                  &
-                              grid%rvort1_max,                     &
-                              grid%uh16,                           &
                               grid%up_heli_max16,                  &
+                              grid%up_heli_max03,                  &
+                              grid%up_heli_max02,                  &
+                              grid%up_heli_min,                    &
+                              grid%up_heli_min16,                  &
+                              grid%up_heli_min03,                  &
+                              grid%up_heli_min02,                  &
+                              grid%up_heli_max01,                  &
+                              grid%rel_vort,                       &
+                              grid%rel_vort_max,                   &
+                              grid%rel_vort_max01,                 &
+                              grid%z,grid%rlv,grid%rlvn,           &
                               grid%ph_2,grid%phb,                  &
                               grid%msfux,grid%msfuy,               &
                               grid%msfvx,grid%msfvy,               &
