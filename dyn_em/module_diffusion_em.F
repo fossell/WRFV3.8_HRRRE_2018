@@ -6013,13 +6013,13 @@ END SUBROUTINE phy_bc
     END SUBROUTINE compute_diff_metrics
 
     SUBROUTINE cal_helicity ( config_flags,itimestep,dt,u, v, w, uh, uh16,       &
-                                   uh02, uh03, up_heli_max,          &
+                                   uh02, uh03, uh01, up_heli_max,    &
                                    up_heli_max16, up_heli_max03,     &
                                    up_heli_max02, up_heli_min,       &
                                    up_heli_min16, up_heli_min03,     &
-                                   up_heli_min02, rel_vort,          &
+                                   up_heli_min02, up_heli_max01,     &
+                                   rel_vort,                         &
                                    rel_vort_max, rel_vort_max01,     &
-                                   uh01, up_heli_max01,              &
                                    z, rlv, rlvn,                     &
                                    ph, phb,                          &
                                    msfux, msfuy,                     &
